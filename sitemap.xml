@@ -16,13 +16,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/index.html</loc>
-    
-    <lastmod>2018-12-03T08:50:28.179Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/about/index.html</loc>
     
     <lastmod>2018-12-03T08:50:28.179Z</lastmod>
@@ -30,14 +23,21 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/03/21/java-gc-basic/</loc>
+    <loc>https://www.quxionglie.com/categories/index.html</loc>
+    
+    <lastmod>2018-12-03T08:50:28.179Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2015/03/31/from-octopress-to-jekyll/</loc>
     
     <lastmod>2018-12-03T08:50:28.178Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/03/31/from-octopress-to-jekyll/</loc>
+    <loc>https://www.quxionglie.com/2015/03/21/java-gc-basic/</loc>
     
     <lastmod>2018-12-03T08:50:28.178Z</lastmod>
     
@@ -65,14 +65,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/11/learning-fabric-1-overview-and-tutorial/</loc>
+    <loc>https://www.quxionglie.com/2014/08/09/linuxxi-lie-4-pxe-plus-dhcp-plus-nfs-plus-kickstartwu-ren-zhi-shou-pi-liang-an-zhuang-centos6-dot-3-x64/</loc>
     
     <lastmod>2018-12-03T08:50:28.177Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/09/linuxxi-lie-4-pxe-plus-dhcp-plus-nfs-plus-kickstartwu-ren-zhi-shou-pi-liang-an-zhuang-centos6-dot-3-x64/</loc>
+    <loc>https://www.quxionglie.com/2014/08/11/learning-fabric-1-overview-and-tutorial/</loc>
     
     <lastmod>2018-12-03T08:50:28.177Z</lastmod>
     
@@ -100,20 +100,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/</loc>
-    
-    <lastmod>2018-12-03T08:50:28.176Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/2013/02/18/install-lua-in-mac-os/</loc>
-    
-    <lastmod>2018-12-03T08:50:28.176Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
     
     <lastmod>2018-12-03T08:50:28.176Z</lastmod>
@@ -128,7 +114,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/06/29/IntelliJ-IDEA-keymap/</loc>
+    <loc>https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/</loc>
+    
+    <lastmod>2018-12-03T08:50:28.176Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2013/02/18/install-lua-in-mac-os/</loc>
     
     <lastmod>2018-12-03T08:50:28.176Z</lastmod>
     
@@ -136,6 +129,13 @@
   
   <url>
     <loc>https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/</loc>
+    
+    <lastmod>2018-12-03T08:50:28.176Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2013/06/29/IntelliJ-IDEA-keymap/</loc>
     
     <lastmod>2018-12-03T08:50:28.176Z</lastmod>
     
@@ -184,6 +184,13 @@
   </url>
   
   <url>
+    <loc>https://www.quxionglie.com/2012/03/23/managing-hierarchical-data-in-oracle-1/</loc>
+    
+    <lastmod>2018-12-03T08:50:28.174Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
     
     <lastmod>2018-12-03T08:50:28.174Z</lastmod>
@@ -192,13 +199,6 @@
   
   <url>
     <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
-    
-    <lastmod>2018-12-03T08:50:28.174Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/2012/03/23/managing-hierarchical-data-in-oracle-1/</loc>
     
     <lastmod>2018-12-03T08:50:28.174Z</lastmod>
     
