@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.quxionglie.com/"/>
-  <updated>2018-12-03T08:50:28.179Z</updated>
+  <updated>2019-05-20T05:10:26.206Z</updated>
   <id>https://www.quxionglie.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>回归github pages</title>
+    <link href="https://www.quxionglie.com/2019/05/20/come-back-github/"/>
+    <id>https://www.quxionglie.com/2019/05/20/come-back-github/</id>
+    <published>2019-05-20T05:02:14.000Z</published>
+    <updated>2019-05-20T05:10:26.206Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;博客一开始是放在github pages上的，随后使用了自定义域名quxionglie.com。后来github全面启用https，但不支持自定义域名，所以博客迁到了自己的VPS上。github支持自定义域名https后，一直没有迁回来。现在正式迁回来，并使用Let’s E
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>从Jekyll迁移到Hexo</title>
@@ -380,24 +399,6 @@
     </summary>
     
       <category term="linux" scheme="https://www.quxionglie.com/categories/linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>导入spring3.2源码到myeclipse中</title>
-    <link href="https://www.quxionglie.com/2013/01/16/import-spring-source-code-into-myeclipse/"/>
-    <id>https://www.quxionglie.com/2013/01/16/import-spring-source-code-into-myeclipse/</id>
-    <published>2013-01-16T08:31:00.000Z</published>
-    <updated>2018-12-03T08:50:28.175Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;spring3.2通过新的基于Gradle的构建来构建项目，它取代了之前的Ant+Ivy系统。&lt;br&gt;本文就介绍如何将spring3.2的源码导入到myeclipse中。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="spring" scheme="https://www.quxionglie.com/categories/spring/"/>
     
     
   </entry>

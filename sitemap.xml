@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.quxionglie.com/2019/05/20/come-back-github/</loc>
+    
+    <lastmod>2019-05-20T05:10:26.206Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/tags/index.html</loc>
     
     <lastmod>2018-12-03T08:50:28.215Z</lastmod>
@@ -30,14 +37,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/03/31/from-octopress-to-jekyll/</loc>
+    <loc>https://www.quxionglie.com/2015/03/21/java-gc-basic/</loc>
     
     <lastmod>2018-12-03T08:50:28.178Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/03/21/java-gc-basic/</loc>
+    <loc>https://www.quxionglie.com/2015/03/31/from-octopress-to-jekyll/</loc>
     
     <lastmod>2018-12-03T08:50:28.178Z</lastmod>
     
@@ -86,13 +93,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
-    
-    <lastmod>2018-12-03T08:50:28.177Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
     
     <lastmod>2018-12-03T08:50:28.177Z</lastmod>
@@ -100,14 +100,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
+    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
     
-    <lastmod>2018-12-03T08:50:28.176Z</lastmod>
+    <lastmod>2018-12-03T08:50:28.177Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/03/03/install-android-development-environment-in-mac/</loc>
+    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
     
     <lastmod>2018-12-03T08:50:28.176Z</lastmod>
     
@@ -122,6 +122,13 @@
   
   <url>
     <loc>https://www.quxionglie.com/2013/02/18/install-lua-in-mac-os/</loc>
+    
+    <lastmod>2018-12-03T08:50:28.176Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2013/03/03/install-android-development-environment-in-mac/</loc>
     
     <lastmod>2018-12-03T08:50:28.176Z</lastmod>
     
@@ -149,14 +156,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/01/03/start-here-2013/</loc>
+    <loc>https://www.quxionglie.com/2013/01/04/newer-should-be-known-in-mac/</loc>
     
     <lastmod>2018-12-03T08:50:28.175Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/01/04/newer-should-be-known-in-mac/</loc>
+    <loc>https://www.quxionglie.com/2013/01/03/start-here-2013/</loc>
     
     <lastmod>2018-12-03T08:50:28.175Z</lastmod>
     
