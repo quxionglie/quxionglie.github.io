@@ -44,14 +44,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/04/09/what-skills-do-developer-have/</loc>
+    <loc>https://www.quxionglie.com/2015/03/31/from-octopress-to-jekyll/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/03/31/from-octopress-to-jekyll/</loc>
+    <loc>https://www.quxionglie.com/2015/04/09/what-skills-do-developer-have/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -86,14 +86,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/11/learning-fabric-1-overview-and-tutorial/</loc>
+    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
+    <loc>https://www.quxionglie.com/2014/08/11/learning-fabric-1-overview-and-tutorial/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -121,13 +121,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/03/03/install-android-development-environment-in-mac/</loc>
-    
-    <lastmod>2018-12-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2013/02/18/install-lua-in-mac-os/</loc>
     
     <lastmod>2018-12-03</lastmod>
@@ -135,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/</loc>
+    <loc>https://www.quxionglie.com/2013/03/03/install-android-development-environment-in-mac/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -143,6 +136,13 @@
   
   <url>
     <loc>https://www.quxionglie.com/2013/06/29/IntelliJ-IDEA-keymap/</loc>
+    
+    <lastmod>2018-12-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -191,14 +191,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/23/managing-hierarchical-data-in-oracle-1/</loc>
+    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
+    <loc>https://www.quxionglie.com/2012/03/23/managing-hierarchical-data-in-oracle-1/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -212,14 +212,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/26/managing-hierarchical-data-in-oracle-4/</loc>
+    <loc>https://www.quxionglie.com/2012/03/25/managing-hierarchical-data-in-oracle-3/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/25/managing-hierarchical-data-in-oracle-3/</loc>
+    <loc>https://www.quxionglie.com/2012/03/26/managing-hierarchical-data-in-oracle-4/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -293,13 +293,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/android/</loc>
-    <lastmod>2021-07-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/categories/lua/</loc>
     <lastmod>2021-07-24</lastmod>
     <changefreq>daily</changefreq>
@@ -307,7 +300,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/vpn/</loc>
+    <loc>https://www.quxionglie.com/categories/android/</loc>
     <lastmod>2021-07-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -315,6 +308,13 @@
   
   <url>
     <loc>https://www.quxionglie.com/categories/idea/</loc>
+    <lastmod>2021-07-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/categories/vpn/</loc>
     <lastmod>2021-07-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
