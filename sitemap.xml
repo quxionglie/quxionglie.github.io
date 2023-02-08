@@ -23,14 +23,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/about/index.html</loc>
+    <loc>https://www.quxionglie.com/categories/index.html</loc>
     
     <lastmod>2018-12-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/index.html</loc>
+    <loc>https://www.quxionglie.com/about/index.html</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -65,14 +65,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/07/16/gradle-02-basic-use/</loc>
+    <loc>https://www.quxionglie.com/2013/07/17/linux-03-permission/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/07/17/linux-03-permission/</loc>
+    <loc>https://www.quxionglie.com/2013/07/16/gradle-02-basic-use/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -86,7 +86,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
+    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -100,7 +100,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
+    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -149,7 +149,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/01/04/newer-should-be-known-in-mac/</loc>
+    <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -163,14 +163,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
-    
-    <lastmod>2018-12-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/2013/01/16/import-spring-source-code-into-myeclipse/</loc>
+    <loc>https://www.quxionglie.com/2013/01/04/newer-should-be-known-in-mac/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -178,6 +171,13 @@
   
   <url>
     <loc>https://www.quxionglie.com/2013/01/22/linux01-install-centos5-dot-8-x64-process/</loc>
+    
+    <lastmod>2018-12-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2013/01/16/import-spring-source-code-into-myeclipse/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -198,7 +198,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/25/managing-hierarchical-data-in-oracle-3/</loc>
+    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -212,14 +212,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/26/managing-hierarchical-data-in-oracle-4/</loc>
+    <loc>https://www.quxionglie.com/2012/03/25/managing-hierarchical-data-in-oracle-3/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
+    <loc>https://www.quxionglie.com/2012/03/26/managing-hierarchical-data-in-oracle-4/</loc>
     
     <lastmod>2018-12-03</lastmod>
     
@@ -244,7 +244,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/mac/</loc>
+    <loc>https://www.quxionglie.com/categories/dev/</loc>
     <lastmod>2023-02-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -258,14 +258,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/dev/</loc>
-    <lastmod>2023-02-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/categories/spring/</loc>
+    <loc>https://www.quxionglie.com/categories/mac/</loc>
     <lastmod>2023-02-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -273,6 +266,13 @@
   
   <url>
     <loc>https://www.quxionglie.com/categories/linux/</loc>
+    <lastmod>2023-02-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/categories/spring/</loc>
     <lastmod>2023-02-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -342,14 +342,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/hexo/</loc>
+    <loc>https://www.quxionglie.com/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2023-02-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>https://www.quxionglie.com/categories/hexo/</loc>
     <lastmod>2023-02-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
