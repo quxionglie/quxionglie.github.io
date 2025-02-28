@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/index.html</loc>
+    <loc>https://www.quxionglie.com/about/index.html</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/about/index.html</loc>
+    <loc>https://www.quxionglie.com/categories/index.html</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -200,6 +200,15 @@
   </url>
   
   <url>
+    <loc>https://www.quxionglie.com/2013/03/03/install-android-development-environment-in-mac/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -210,15 +219,6 @@
   
   <url>
     <loc>https://www.quxionglie.com/2013/02/18/install-lua-in-mac-os/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/2013/03/03/install-android-development-environment-in-mac/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -245,7 +245,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/25/managing-hierarchical-data-in-oracle-3/</loc>
+    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -254,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
+    <loc>https://www.quxionglie.com/2012/03/25/managing-hierarchical-data-in-oracle-3/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -350,20 +350,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/gradle/</loc>
-    <lastmod>2025-02-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/categories/lua/</loc>
-    <lastmod>2025-02-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/categories/android/</loc>
     <lastmod>2025-02-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -371,7 +357,21 @@
   </url>
   
   <url>
+    <loc>https://www.quxionglie.com/categories/gradle/</loc>
+    <lastmod>2025-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/categories/vpn/</loc>
+    <lastmod>2025-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/categories/lua/</loc>
     <lastmod>2025-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
