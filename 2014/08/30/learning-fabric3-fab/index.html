@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.quxionglie.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Fabric最常用的命令行工具是fab。当Fabric安装的时候，我们都能在环境变量中找到它。 官方usage说明：fab options and arguments 主要内容 12345#1.基本使用方法#2.命令行选项#3.Per-task参数##3.1 Per-task语法定义##3.2 角色和主机 Roles and hosts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fabric-03 fab命令">
+<meta property="og:url" content="https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/index.html">
+<meta property="og:site_name" content="阿烈的博客">
+<meta property="og:description" content="Fabric最常用的命令行工具是fab。当Fabric安装的时候，我们都能在环境变量中找到它。 官方usage说明：fab options and arguments 主要内容 12345#1.基本使用方法#2.命令行选项#3.Per-task参数##3.1 Per-task语法定义##3.2 角色和主机 Roles and hosts">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2014-08-30T00:52:00.000Z">
+<meta property="article:modified_time" content="2025-02-28T01:29:41.494Z">
+<meta property="article:author" content="lie">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Fabric-03 fab命令 | 阿烈的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?36175c8b1958d080e840f34fc69cf52d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="阿烈的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">阿烈的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code,Write,Enjoy life!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Fabric-03 fab命令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-08-30 08:52:00" itemprop="dateCreated datePublished" datetime="2014-08-30T08:52:00+08:00">2014-08-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fabric/" itemprop="url" rel="index"><span itemprop="name">fabric</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Fabric最常用的命令行工具是fab。当Fabric安装的时候，我们都能在环境变量中找到它。</p>
+<p>官方usage说明：<a target="_blank" rel="noopener" href="http://docs.fabfile.org/en/1.9/usage/fab.html">fab options and arguments</a></p>
+<p>主要内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#1.基本使用方法</span><br><span class="line">#2.命令行选项</span><br><span class="line">#3.Per-task参数</span><br><span class="line">##3.1 Per-task语法定义</span><br><span class="line">##3.2 角色和主机 Roles and hosts</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>#1.基本使用方法</p>
+<p>最常见的使用方法，使用时没有任何选项(options)</p>
+<pre><code>$ fab task1 task2
+</code></pre>
+<p>上面命令会在fabfile定义的主机上执行task1，接着是task2。</p>
+<p>另一种用法，估计就很少人会知道了，</p>
+<pre><code>$ fab [options] -- [shell command]
+</code></pre>
+<p>– 后面的[shell command]会使用Fabric的run命令来执行。如果我们在命令行上定义了主机，[shell command]相当于作为单行的匿名task来执行。</p>
+<pre><code>$ fab -H host1,host2,host3 -- uname -a
+</code></pre>
+<p>与 执行下面文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from fabric.api import run</span><br><span class="line"></span><br><span class="line">def anonymous():</span><br><span class="line">    run(&quot;uname -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>的命令</p>
+<pre><code>$ fab -H host1,host2,host3 anonymous
+</code></pre>
+<p>是一样的效果。    </p>
+<p>测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">[root@fabserver fabric]# <span class="built_in">cat</span> fabfile.py</span><br><span class="line">from fabric.api import run</span><br><span class="line"></span><br><span class="line">def anonymous():</span><br><span class="line">    run(<span class="string">&quot;uname -a&quot;</span>)</span><br><span class="line"></span><br><span class="line">[root@fabserver fabric]# fab -H host1,host2,host3 -- <span class="built_in">uname</span> -a</span><br><span class="line">[host1] Executing task <span class="string">&#x27;&lt;remainder&gt;&#x27;</span></span><br><span class="line">[host1] run: <span class="built_in">uname</span> -a</span><br><span class="line">[host1] out: Linux host1 2.6.32-431.el6.x86_64 <span class="comment">#1 SMP Fri Nov 22 03:15:09 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line">[host1] out:</span><br><span class="line"></span><br><span class="line">[host2] Executing task <span class="string">&#x27;&lt;remainder&gt;&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">uname</span> -a</span><br><span class="line">[host2] out: Linux host2 2.6.32-431.el6.x86_64 <span class="comment">#1 SMP Fri Nov 22 03:15:09 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line">[host3] Executing task <span class="string">&#x27;&lt;remainder&gt;&#x27;</span></span><br><span class="line">[host3] run: <span class="built_in">uname</span> -a</span><br><span class="line">[host3] out: Linux host3 2.6.32-431.el6.x86_64 <span class="comment">#1 SMP Fri Nov 22 03:15:09 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line">[host3] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host3... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host1... <span class="keyword">done</span>.</span><br><span class="line"></span><br><span class="line">[root@fabserver fabric]# fab -H host1,host2,host3 anonymous</span><br><span class="line">[host1] Executing task <span class="string">&#x27;anonymous&#x27;</span></span><br><span class="line">[host1] run: <span class="built_in">uname</span> -a</span><br><span class="line">[host1] out: Linux host1 2.6.32-431.el6.x86_64 <span class="comment">#1 SMP Fri Nov 22 03:15:09 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line">[host1] out:</span><br><span class="line"></span><br><span class="line">[host2] Executing task <span class="string">&#x27;anonymous&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">uname</span> -a</span><br><span class="line">[host2] out: Linux host2 2.6.32-431.el6.x86_64 <span class="comment">#1 SMP Fri Nov 22 03:15:09 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line">[host3] Executing task <span class="string">&#x27;anonymous&#x27;</span></span><br><span class="line">[host3] run: <span class="built_in">uname</span> -a</span><br><span class="line">[host3] out: Linux host3 2.6.32-431.el6.x86_64 <span class="comment">#1 SMP Fri Nov 22 03:15:09 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line">[host3] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host3... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host1... <span class="keyword">done</span>.</span><br></pre></td></tr></table></figure>
+
+<p>#2.命令行选项</p>
+<p>fab命令的选项(options)基本上都可以对应上fabfile中的env变量。</p>
+<p>如-H HOSTS, –hosts=HOSTS 有  env.hosts </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fab --help</span></span><br><span class="line">Usage: fab [options] &lt;<span class="built_in">command</span>&gt;[:arg1,arg2=val2,host=foo,hosts=<span class="string">&#x27;h1;h2&#x27;</span>,...] ...</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -h, --<span class="built_in">help</span>            show this <span class="built_in">help</span> message and <span class="built_in">exit</span></span><br><span class="line">  -d NAME, --display=NAME 			<span class="comment">#显示命令[NAME]的细节信息</span></span><br><span class="line">                        <span class="built_in">print</span> detailed info about <span class="built_in">command</span> NAME</span><br><span class="line">  -F FORMAT, --list-format=FORMAT 	<span class="comment">#格式</span></span><br><span class="line">                        formats --list, choices: short, normal, nested</span><br><span class="line">  -I, --initial-password-prompt</span><br><span class="line">                        Force password prompt up-front</span><br><span class="line">  -l, --list            <span class="comment">#列出可以执行的命令</span></span><br><span class="line">  						<span class="built_in">print</span> list of possible commands and <span class="built_in">exit</span> </span><br><span class="line">  --<span class="built_in">set</span>=KEY=VALUE,...   <span class="comment">#设置env的key=value对</span></span><br><span class="line">  						comma separated KEY=VALUE pairs to <span class="built_in">set</span> Fab <span class="built_in">env</span> vars </span><br><span class="line">  --shortlist           <span class="built_in">alias</span> <span class="keyword">for</span> -F short --list</span><br><span class="line">  -V, --version         show program<span class="string">&#x27;s version number and exit</span></span><br><span class="line"><span class="string">  -a, --no_agent        don&#x27;</span>t use the running SSH agent</span><br><span class="line">  -A, --forward-agent   forward <span class="built_in">local</span> agent to remote end</span><br><span class="line">  --abort-on-prompts    abort instead of prompting (<span class="keyword">for</span> password, host, etc)</span><br><span class="line">  -c PATH, --config=PATH</span><br><span class="line">                        specify location of config file to use</span><br><span class="line">  --colorize-errors     Color error output</span><br><span class="line">  -D, --disable-known-hosts</span><br><span class="line">                        <span class="keyword">do</span> not load user known_hosts file</span><br><span class="line">  -e, --eagerly-disconnect</span><br><span class="line">                        disconnect from hosts as soon as possible</span><br><span class="line">  -f PATH, --fabfile=PATH <span class="comment">#fabric python模块文件路径</span></span><br><span class="line">                        python module file to import, e.g. <span class="string">&#x27;../other.py&#x27;</span></span><br><span class="line">  -g HOST, --gateway=HOST <span class="comment">#网关</span></span><br><span class="line">                        gateway host to connect through</span><br><span class="line">  --hide=LEVELS         comma-separated list of output levels to hide</span><br><span class="line">  -H HOSTS, --hosts=HOSTS <span class="comment">#主机定义，多个以逗号分开</span></span><br><span class="line">                        comma-separated list of hosts to operate on</span><br><span class="line">  -i PATH               path to SSH private key file. May be repeated.</span><br><span class="line">  -k, --no-keys         don<span class="string">&#x27;t load private key files from ~/.ssh/</span></span><br><span class="line"><span class="string">  --keepalive=N         enables a keepalive every N seconds</span></span><br><span class="line"><span class="string">  --linewise            print line-by-line instead of byte-by-byte</span></span><br><span class="line"><span class="string">  -n M, --connection-attempts=M 	#连接尝试次数</span></span><br><span class="line"><span class="string">                        make M attempts to connect before giving up</span></span><br><span class="line"><span class="string">  --no-pty              do not use pseudo-terminal in run/sudo</span></span><br><span class="line"><span class="string">  -p PASSWORD, --password=PASSWORD  #授权或sudo时使用的密码</span></span><br><span class="line"><span class="string">                        password for use with authentication and/or sudo</span></span><br><span class="line"><span class="string">  -P, --parallel        #并行执行</span></span><br><span class="line"><span class="string">  						default to parallel execution method </span></span><br><span class="line"><span class="string">  --port=PORT           SSH connection port #ssh端口</span></span><br><span class="line"><span class="string">  -r, --reject-unknown-hosts #主机不存在于SSH known_hosts文件中，就会中止连接</span></span><br><span class="line"><span class="string">                        reject unknown hosts</span></span><br><span class="line"><span class="string">  --system-known-hosts=SYSTEM_KNOWN_HOSTS</span></span><br><span class="line"><span class="string">                        load system known_hosts file before reading user</span></span><br><span class="line"><span class="string">                        known_hosts</span></span><br><span class="line"><span class="string">  -R ROLES, --roles=ROLES #角色</span></span><br><span class="line"><span class="string">                        comma-separated list of roles to operate on</span></span><br><span class="line"><span class="string">  -s SHELL, --shell=SHELL #远程执行命令的shell</span></span><br><span class="line"><span class="string">                        specify a new shell, defaults to &#x27;</span>/bin/bash -l -c<span class="string">&#x27;</span></span><br><span class="line"><span class="string">  --show=LEVELS         comma-separated list of output levels to show</span></span><br><span class="line"><span class="string">  --skip-bad-hosts      skip over hosts that can&#x27;</span>t be reached</span><br><span class="line">  --ssh-config-path=PATH</span><br><span class="line">                        Path to SSH config file</span><br><span class="line">  -t N, --<span class="built_in">timeout</span>=N     			<span class="comment">#ssh连接超时时间</span></span><br><span class="line">  						<span class="built_in">set</span> connection <span class="built_in">timeout</span> to N seconds </span><br><span class="line"></span><br><span class="line">  -T N, --command-timeout=N 		<span class="comment">#ssh远程命令执行超时时间</span></span><br><span class="line">                        <span class="built_in">set</span> remote <span class="built_in">command</span> <span class="built_in">timeout</span> to N seconds</span><br><span class="line">  -u USER, --user=USER  <span class="comment">#远程主机的用户名</span></span><br><span class="line">  						username to use when connecting to remote hosts </span><br><span class="line">  -w, --warn-only       warn, instead of abort, when commands fail</span><br><span class="line">  -x HOSTS, --exclude-hosts=HOSTS 	<span class="comment">#哪些主机不需要执行命令</span></span><br><span class="line">                        comma-separated list of hosts to exclude</span><br><span class="line">  -z INT, --pool-size=INT 			<span class="comment">#并行执行时，并发线程数</span></span><br><span class="line">                        number of concurrent processes to use <span class="keyword">in</span> parallel mode</span><br></pre></td></tr></table></figure>
+
+<p>测试：</p>
+<p>#####选项 -d </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@fabserver fabric]# <span class="built_in">cat</span> fabfile.py</span><br><span class="line">def hello(name=<span class="string">&quot;world&quot;</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello %s!&quot;</span> % name)</span><br><span class="line">[root@fabserver fabric]# fab -d hello</span><br><span class="line">Displaying detailed information <span class="keyword">for</span> task <span class="string">&#x27;hello&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    No docstring provided</span><br><span class="line">    Arguments: name=<span class="string">&#x27;world&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>#3.Per-task参数</p>
+<p>##3.1 Per-task语法定义</p>
+<p>上面”2.命令行选项”提到的命令行选项是全局有效。如果不是变量又在其它地方覆盖命令行选项值的话，这些定义对所有task都是有效的。</p>
+<p>我们可以针对每个task，定义不同的参数，这就是“per-task arguments”。</p>
+<p>“per-task arguments”语法定义：</p>
+<p>  (1) 使用:分隔任务(task)和与参数(arguments)</p>
+<p>  (2) 使用,分隔不同的参数(arguments),参数需要反斜线()进行转义,如,</p>
+<p>  (3) 使用=进行keyword arguments的赋值，或根据位置参数进行定义。同样需要使用反斜线进行转义。</p>
+<p>例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[root@fabserver fabric]# <span class="built_in">cat</span> fabfile.py</span><br><span class="line">def new_user(username, admin=<span class="string">&#x27;no&#x27;</span>, comment=<span class="string">&quot;No comment provided&quot;</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;New User (%s): %s&quot;</span> % (username, comment))</span><br><span class="line">    pass</span><br><span class="line">[root@fabserver fabric]# fab -l</span><br><span class="line">Available commands:</span><br><span class="line"></span><br><span class="line">    new_user</span><br><span class="line">[root@fabserver fabric]#</span><br><span class="line"></span><br><span class="line"><span class="comment">#仅定义username</span></span><br><span class="line">[root@fabserver fabric]# fab new_user:myusername</span><br><span class="line">New User (myusername): No comment provided</span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">[root@fabserver fabric]# fab new_user:username=myusername</span><br><span class="line">New User (myusername): No comment provided</span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用位置参数</span></span><br><span class="line">[root@fabserver fabric]# fab new_user:myusername,<span class="built_in">yes</span></span><br><span class="line">New User (myusername): No comment provided</span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line"></span><br><span class="line"><span class="comment">#混合使用</span></span><br><span class="line">[root@fabserver fabric]# fab new_user:myusername,admin=<span class="built_in">yes</span></span><br><span class="line">New User (myusername): No comment provided</span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line"><span class="comment">#使用转义</span></span><br><span class="line">[root@fabserver fabric]# fab new_user:myusername,admin=no,comment=<span class="string">&#x27;Gary\, new developer (starts Monday)&#x27;</span></span><br><span class="line">New User (myusername): Gary, new developer (starts Monday)</span><br><span class="line"></span><br><span class="line">Done.</span><br></pre></td></tr></table></figure>
+<p>##3.2 角色和主机 Roles and hosts</p>
+<p>常用的参数：host, hosts, role and roles</p>
+<p>注意：hosts的主机是以;隔开。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@fabserver fabric]# fab new_user:myusername,hosts=<span class="string">&quot;host1;host2&quot;</span></span><br><span class="line">[host1] Executing task <span class="string">&#x27;new_user&#x27;</span></span><br><span class="line">New User (myusername): No comment provided</span><br><span class="line">[host2] Executing task <span class="string">&#x27;new_user&#x27;</span></span><br><span class="line">New User (myusername): No comment provided</span><br><span class="line"></span><br><span class="line">Done.</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/08/24/learning-fabric2-hosts-and-roles/" rel="prev" title="Fabric-02 主机(Hosts)和角色(Roles)">
+      <i class="fa fa-chevron-left"></i> Fabric-02 主机(Hosts)和角色(Roles)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/03/21/java-gc-basic/" rel="next" title="JAVA垃圾回收入门">
+      JAVA垃圾回收入门 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lie"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">lie</p>
+  <div class="site-description" itemprop="description">Yesterday You Said Tomorrow</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2012 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿烈</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'cab274acde8887facde4',
+      clientSecret: 'e6816fb20c02f5a6d9d50bc1228a5c738f87d350',
+      repo        : 'quxionglie.github.io',
+      owner       : 'quxionglie',
+      admin       : ['quxionglie'],
+      id          : '48e2f9598d270745c601db5d0a6fc1cb',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

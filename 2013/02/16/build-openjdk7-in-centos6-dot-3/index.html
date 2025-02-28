@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.quxionglie.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文包括4部分内容：1.基本流程（阅读README和README-builds.html）2.安装基础软件包3.配置变量4.检查环境是否配置ok与编译jdk源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos6.3上编译OpenJDK7源码">
+<meta property="og:url" content="https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/index.html">
+<meta property="og:site_name" content="阿烈的博客">
+<meta property="og:description" content="本文包括4部分内容：1.基本流程（阅读README和README-builds.html）2.安装基础软件包3.配置变量4.检查环境是否配置ok与编译jdk源码">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2013-02-16T07:56:00.000Z">
+<meta property="article:modified_time" content="2025-02-28T01:29:41.492Z">
+<meta property="article:author" content="lie">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Centos6.3上编译OpenJDK7源码 | 阿烈的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?36175c8b1958d080e840f34fc69cf52d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="阿烈的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">阿烈的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code,Write,Enjoy life!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Centos6.3上编译OpenJDK7源码
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2013-02-16 15:56:00" itemprop="dateCreated datePublished" datetime="2013-02-16T15:56:00+08:00">2013-02-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文包括4部分内容：<br>1.基本流程（阅读README和README-builds.html）<br>2.安装基础软件包<br>3.配置变量<br>4.检查环境是否配置ok与编译jdk源码  </p>
+<span id="more"></span>
+
+<p>下载源码openjdk-7u6-fcs-src-b24-28_aug_2012.zip，解压</p>
+<h2 id="基本流程（阅读README和README-builds-html）"><a href="#基本流程（阅读README和README-builds-html）" class="headerlink" title="基本流程（阅读README和README-builds.html）"></a>基本流程（阅读README和README-builds.html）</h2><p>README-builds.html中包含有详细的安装信息，最好能完整的阅读一下。<br>———README——–<br>Simple Build Instructions:</p>
+<p>0.Get the necessary system software/packages installed on your system, see<br><a target="_blank" rel="noopener" href="http://hg.openjdk.java.net/jdk7/build/raw-file/tip/README-builds.html">http://hg.openjdk.java.net/jdk7/build/raw-file/tip/README-builds.html</a>  </p>
+<p>1.If you don’t have a jdk6 installed, download and install a JDK 6 from<br><a target="_blank" rel="noopener" href="http://java.sun.com/javase/downloads/index.jsp">http://java.sun.com/javase/downloads/index.jsp</a><br>Set the environment variable ALT_BOOTDIR to the location of JDK 6.</p>
+<p>2.Check the sanity of doing a build with your current system:<br>make sanity<br>See README-builds.html if you run into problems.</p>
+<p>3.Do a complete build of the OpenJDK:<br>make all<br>The resulting JDK image should be found in build/*/j2sdk-image</p>
+<p>———-README-builds.html———<br>Basic Linux Check List</p>
+<p>Install the Bootstrap JDK, set ALT_BOOTDIR.<br>Optional Import JDK, set ALT_JDK_IMPORT_PATH.<br>Install or upgrade the FreeType development package.<br>Install Ant 1.7.1 or newer, make sure it is in your PATH.  </p>
+<h3 id="CentOS-5-5"><a href="#CentOS-5-5" class="headerlink" title="CentOS 5.5"></a>CentOS 5.5</h3><p>After installing CentOS 5.5 you need to make sure you have the following   Development bundles installed:<br>    Development Libraries<br>     Development Tools<br>     Java Development<br>     X Software Development (Including XFree86-devel)<br>Plus the following packages:   </p>
+<p> cups devel: Cups Development Package<br> alsa devel: Alsa Development Package<br> ant: Ant Package<br> Xi devel: libXi.so Development Package<br>The freetype 2.3 packages don’t seem to be available, but the freetype 2.3 sources can be downloaded, built, and installed easily enough from the freetype site. Build and install with something like:  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure &amp;&amp; make &amp;&amp; <span class="built_in">sudo</span> -u root make install </span><br></pre></td></tr></table></figure>
+
+<p>(注意：Version 2.3 or newer of FreeType is required for building the OpenJDK.) =》freetype的版本至少为2.3或更新  </p>
+<p>Mercurial packages could not be found easily, but a Google search should find ones, and they usually include Python if it’s needed.  </p>
+<p>注意：<br>(1).All OpenJDK builds require access to least Ant 1.7.1.（ant的版本至少为1.7.1）<br>(2).Linux only: Version 0.9.1 or newer of the ALSA files are required for building the OpenJDK on Linux. </p>
+<h2 id="安装基础软件包"><a href="#安装基础软件包" class="headerlink" title="安装基础软件包"></a>安装基础软件包</h2><p>我的centos6安装在vmware Fusion上，安装时使用最小化(Minimal)安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@vm-pc ~]# <span class="built_in">cat</span> /etc/redhat-release </span><br><span class="line">CentOS release 6.3 (Final)</span><br><span class="line">[root@vm-pc ~]# <span class="built_in">uname</span> -m</span><br><span class="line">x86_64</span><br><span class="line">[root@vm-pc ~]# <span class="built_in">uname</span> -r</span><br><span class="line">2.6.32-279.el6.x86_64</span><br></pre></td></tr></table></figure>
+
+<p>执行下面命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#配置更新源</span></span><br><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</span><br><span class="line">curl http://mirrors.163.com/.help/CentOS6-Base-163.repo &gt; CentOS6-Base-163.repo </span><br><span class="line"><span class="comment">#当前wget还不能用</span></span><br><span class="line"><span class="comment">#wget http://mirrors.163.com/.help/CentOS6-Base-163.repo</span></span><br><span class="line"><span class="built_in">mv</span> CentOS-Base.repo CentOS-Base.repo.bak</span><br><span class="line"><span class="built_in">mv</span> CentOS6-Base-163.repo CentOS-Base.repo</span><br><span class="line">yum makecache</span><br><span class="line"></span><br><span class="line">yum -y groupinstall <span class="string">&#x27;base&#x27;</span></span><br><span class="line">yum -y install make</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#安装jdk必备软件包</span></span><br><span class="line">yum -y install alsa-lib-devel</span><br><span class="line">yum -y install cups-devel</span><br><span class="line">yum -y install libXi-devel</span><br><span class="line">yum -y install gcc gcc-c++</span><br><span class="line">yum -y install libX*</span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> -p /application/tools</span><br><span class="line"><span class="built_in">cd</span> /application/tools</span><br><span class="line"></span><br><span class="line"><span class="comment">#上传或下载相关文件到/application/tools</span></span><br><span class="line"><span class="comment">#freetype-2.3.12.tar.gz </span></span><br><span class="line"><span class="comment">#openjdk-7u6-fcs-src-b24-28_aug_2012.zip</span></span><br><span class="line"><span class="comment">#apache-ant-1.7.1-bin.zip </span></span><br><span class="line"><span class="comment">#jdk-6u26-linux-i586.bin</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#编译安装freetype</span></span><br><span class="line">tar -xzf freetype-2.3.12.tar.gz</span><br><span class="line"><span class="built_in">cd</span> freetype-2.3.12</span><br><span class="line">./configure </span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果安装时出现如下错误，则执行</p>
+<p>mkdir -p /usr/local/include/freetype2/freetype/internal<br>make install  </p>
+<p>rmdir /usr/local/include/freetype2/freetype/internal<br>rmdir: failed to remove `/usr/local/include/freetype2/freetype/internal’: No such file or directory<br>make: [install] Error 1 (ignored)<br>/usr/bin/install -c -m 644 ./builds/unix/ft2unix.h <br>/usr/local/include/ft2build.h<br>/usr/bin/install -c -m 644 ./builds/unix/ftconfig.h <br>/usr/local/include/freetype2/freetype/config/ftconfig.h</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#安装jdk</span></span><br><span class="line">yum -y install ld-linux.so.2</span><br><span class="line">sh install_jdk.sh</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装ant</span></span><br><span class="line"><span class="built_in">cd</span> /application/tools/</span><br><span class="line">unzip apache-ant-1.7.1-bin.zip</span><br><span class="line"><span class="built_in">ln</span> -s /application/tools/apache-ant-1.7.1/bin/ant /usr/bin/ant</span><br></pre></td></tr></table></figure>
+
+<p>检查java与ant  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@vm-pc ~]# java -version</span><br><span class="line">java version <span class="string">&quot;1.6.0_26&quot;</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.6.0_26-b03)</span><br><span class="line">Java HotSpot(TM) Client VM (build 20.1-b02, mixed mode, sharing)</span><br><span class="line">[root@vm-pc ~]# ant</span><br><span class="line">Buildfile: build.xml does not exist!</span><br><span class="line">Build failed</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置变量"><a href="#配置变量" class="headerlink" title="配置变量"></a>配置变量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unset</span> CLASSPATH</span><br><span class="line"><span class="built_in">unset</span> JAVA_HOME</span><br><span class="line"><span class="built_in">export</span> LANG=C</span><br><span class="line"><span class="built_in">export</span> ALT_BOOTDIR=/application/java/jdk</span><br><span class="line"><span class="built_in">export</span> ANT_HOME=/application/tools/apache-ant-1.7.1/</span><br><span class="line"><span class="built_in">export</span> ALT_FREETYPE_LIB_PATH=/usr/local/lib</span><br><span class="line"><span class="built_in">export</span> SKIP_DEBUG_BUILD=<span class="literal">false</span> </span><br><span class="line"><span class="built_in">export</span> SKIP_FASTDEBUG_BUILD=<span class="literal">true</span> </span><br><span class="line"><span class="built_in">export</span> DEBUG_NAME=debug </span><br><span class="line"><span class="built_in">export</span> ALT_FREETYPE_HEADERS_PATH=/usr/local/include/freetype2</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查环境是否配置OK与编译jdk源码"><a href="#检查环境是否配置OK与编译jdk源码" class="headerlink" title="检查环境是否配置OK与编译jdk源码"></a>检查环境是否配置OK与编译jdk源码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@vm-pc openjdk]# <span class="built_in">pwd</span></span><br><span class="line">/application/tools/openjdk</span><br><span class="line">[root@vm-pc openjdk]# make sanity</span><br><span class="line"></span><br><span class="line">.......</span><br><span class="line">OpenJDK-specific settings:</span><br><span class="line">FREETYPE_HEADERS_PATH = /usr/local/include/freetype2</span><br><span class="line">ALT_FREETYPE_HEADERS_PATH = /usr/local/include/freetype2</span><br><span class="line">FREETYPE_LIB_PATH = /usr/local/lib</span><br><span class="line">ALT_FREETYPE_LIB_PATH = /usr/local/lib</span><br><span class="line"></span><br><span class="line">Previous JDK Settings:</span><br><span class="line">PREVIOUS_RELEASE_PATH = USING-PREVIOUS_RELEASE_IMAGE</span><br><span class="line">ALT_PREVIOUS_RELEASE_PATH = </span><br><span class="line">PREVIOUS_JDK_VERSION = 1.6.0</span><br><span class="line">ALT_PREVIOUS_JDK_VERSION = </span><br><span class="line">PREVIOUS_JDK_FILE = </span><br><span class="line">ALT_PREVIOUS_JDK_FILE = </span><br><span class="line">PREVIOUS_JRE_FILE = </span><br><span class="line">ALT_PREVIOUS_JRE_FILE = </span><br><span class="line">PREVIOUS_RELEASE_IMAGE = /application/java/jdk</span><br><span class="line">ALT_PREVIOUS_RELEASE_IMAGE =</span><br></pre></td></tr></table></figure>
+
+<p>Sanity check passed.  #表示ok了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@vm-pc openjdk]# make all ARCH_DATA_MODEL=64 ALLOW_DOWNLOADS=<span class="literal">true</span></span><br><span class="line">…</span><br><span class="line"><span class="comment">#-- Build times ----------</span></span><br><span class="line">Target debug_build</span><br><span class="line">Start 2013-01-07 14:41:38</span><br><span class="line">End 2013-01-07 15:09:46</span><br><span class="line">00:01:23 corba</span><br><span class="line">00:09:56 hotspot</span><br><span class="line">00:00:18 jaxp</span><br><span class="line">00:00:25 jaxws</span><br><span class="line">00:15:33 jdk</span><br><span class="line">00:00:33 langtools</span><br><span class="line">00:28:08 TOTAL</span><br><span class="line">-------------------------</span><br><span class="line">make[1]: Leaving directory `/application/tools/openjdk<span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>查看劳动成果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@vm-pc openjdk]# ./build/linux-amd64/bin/java -version</span><br><span class="line">openjdk version <span class="string">&quot;1.7.0-internal-debug&quot;</span></span><br><span class="line">OpenJDK Runtime Environment (build 1.7.0-internal-debug-root_2013_01_07_14_31-b00)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 23.2-b09-jvmg, mixed mode)</span><br></pre></td></tr></table></figure>
+
+<p>附：安装install_jdk.sh脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!bin/bash</span></span><br><span class="line"><span class="comment"># auto install jdk</span></span><br><span class="line"><span class="comment"># Filename: install_jdk.sh</span></span><br><span class="line"><span class="comment"># Author: quxl</span></span><br><span class="line"><span class="comment"># Email: xionglie.qu@gmail.com</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$UID</span>&quot;</span> -ne <span class="string">&quot;0&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;You must be root to run this script! &quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">TOOL_DIR=/application/tools</span><br><span class="line">JAVA_DIR=/application/java</span><br><span class="line">JAVA_HOME_DIR=<span class="variable">$&#123;JAVA_DIR&#125;</span>/jdk</span><br><span class="line">SETUP_FILE=jdk-6u26-linux-i586.bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> -p <span class="variable">$&#123;JAVA_DIR&#125;</span></span><br><span class="line">/bin/cp -f  <span class="variable">$&#123;TOOL_DIR&#125;</span>/<span class="variable">$&#123;SETUP_FILE&#125;</span> <span class="variable">$&#123;JAVA_DIR&#125;</span>/<span class="variable">$&#123;SETUP_FILE&#125;</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;JAVA_DIR&#125;</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;\r\n&quot;</span> &gt; <span class="built_in">yes</span></span><br><span class="line"><span class="built_in">chmod</span> u+x <span class="variable">$&#123;SETUP_FILE&#125;</span></span><br><span class="line">./<span class="variable">$&#123;SETUP_FILE&#125;</span>&lt;<span class="built_in">yes</span></span><br><span class="line"><span class="built_in">rm</span> -f <span class="variable">$&#123;JAVA_DIR&#125;</span>/<span class="variable">$&#123;SETUP_FILE&#125;</span></span><br><span class="line"><span class="built_in">rm</span> -f <span class="built_in">yes</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">ln</span> -s <span class="variable">$&#123;JAVA_DIR&#125;</span>/jdk1.6.0_26 <span class="variable">$&#123;JAVA_HOME_DIR&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &gt;&gt; /etc/profile &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">#set java environment</span></span><br><span class="line"><span class="string">JAVA_HOME=$&#123;JAVA_HOME_DIR&#125;</span></span><br><span class="line"><span class="string">export JRE_HOME=$&#123;JAVA_HOME_DIR&#125;/jre</span></span><br><span class="line"><span class="string">export CLASSPATH=.:\$JAVA_HOME/lib:\$JRE_HOME/lib:\$CLASSPATH</span></span><br><span class="line"><span class="string">export PATH=\$JAVA_HOME/bin:\$JRE_HOME/bin:\$PATH</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;install Ok...&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2013/01/24/pxe-plus-dhcp-plus-nfs-plus-kickstart-centos5-dot-8-x64/" rel="prev" title="linux系列2 - pxe+dhcp+nfs+kickstart无人值守批量安装Centos5.8 x64">
+      <i class="fa fa-chevron-left"></i> linux系列2 - pxe+dhcp+nfs+kickstart无人值守批量安装Centos5.8 x64
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2013/02/17/gradle-01-build-project-dir/" rel="next" title="使用gradle构建项目01-建立项目目录结构 ">
+      使用gradle构建项目01-建立项目目录结构  <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B%EF%BC%88%E9%98%85%E8%AF%BBREADME%E5%92%8CREADME-builds-html%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">基本流程（阅读README和README-builds.html）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS-5-5"><span class="nav-number">1.1.</span> <span class="nav-text">CentOS 5.5</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">安装基础软件包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">配置变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%8E%AF%E5%A2%83%E6%98%AF%E5%90%A6%E9%85%8D%E7%BD%AEOK%E4%B8%8E%E7%BC%96%E8%AF%91jdk%E6%BA%90%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">检查环境是否配置OK与编译jdk源码</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lie"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">lie</p>
+  <div class="site-description" itemprop="description">Yesterday You Said Tomorrow</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2012 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿烈</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'cab274acde8887facde4',
+      clientSecret: 'e6816fb20c02f5a6d9d50bc1228a5c738f87d350',
+      repo        : 'quxionglie.github.io',
+      owner       : 'quxionglie',
+      admin       : ['quxionglie'],
+      id          : 'e23dafb07fc9c849b1748b267d6cc750',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

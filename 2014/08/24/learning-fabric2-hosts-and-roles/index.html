@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.quxionglie.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="主要内容 12345678910111213141516#1.定义主机列表##1.1 主机##1.2 角色#2.如何构建主机列表(host lists) ?##2.1 四种主机定义方式###(1)Globally, via env###(2)Globally, via the command line###(3)Per-task, via the command line###(4)Per-tas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fabric-02 主机(Hosts)和角色(Roles)">
+<meta property="og:url" content="https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/index.html">
+<meta property="og:site_name" content="阿烈的博客">
+<meta property="og:description" content="主要内容 12345678910111213141516#1.定义主机列表##1.1 主机##1.2 角色#2.如何构建主机列表(host lists) ?##2.1 四种主机定义方式###(1)Globally, via env###(2)Globally, via the command line###(3)Per-task, via the command line###(4)Per-tas">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2014-08-24T06:27:00.000Z">
+<meta property="article:modified_time" content="2025-02-28T01:29:41.494Z">
+<meta property="article:author" content="lie">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Fabric-02 主机(Hosts)和角色(Roles) | 阿烈的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?36175c8b1958d080e840f34fc69cf52d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="阿烈的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">阿烈的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code,Write,Enjoy life!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Fabric-02 主机(Hosts)和角色(Roles)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-08-24 14:27:00" itemprop="dateCreated datePublished" datetime="2014-08-24T14:27:00+08:00">2014-08-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fabric/" itemprop="url" rel="index"><span itemprop="name">fabric</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>主要内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#1.定义主机列表</span><br><span class="line">##1.1 主机</span><br><span class="line">##1.2 角色</span><br><span class="line">#2.如何构建主机列表(host lists) ?</span><br><span class="line">##2.1 四种主机定义方式</span><br><span class="line">###(1)Globally, via env</span><br><span class="line">###(2)Globally, via the command line</span><br><span class="line">###(3)Per-task, via the command line</span><br><span class="line">###(4)Per-task, via decorators</span><br><span class="line">##2.2 主机定义的优先顺序</span><br><span class="line">##2.3 测试</span><br><span class="line">#3. 其它</span><br><span class="line">##3.1 合并主机列表</span><br><span class="line">##3.2 重复的主机</span><br><span class="line">##3.3 不包含指定的主机</span><br><span class="line">##3.4 使用execute智能执行task</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>#1.定义主机列表<br>##1.1 主机<br>主机的定义格式为: username@hostname:port</p>
+<p>username和port是可选的(关联@和:),默认是本地用户，端口是22.</p>
+<p>ip6格式同样是支持的。例如::1, [::1]:1222, user@2001:db8::1 or user@[2001:db8::1]:1222</p>
+<p>##1.2 角色</p>
+<p>有时候我们希望给主机分组，这样我们就能方便的控制它们。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fabric.api <span class="keyword">import</span> env</span><br><span class="line"></span><br><span class="line">env.roledefs[<span class="string">&#x27;webservers&#x27;</span>] = [<span class="string">&#x27;www1&#x27;</span>, <span class="string">&#x27;www2&#x27;</span>, <span class="string">&#x27;www3&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fabric.api <span class="keyword">import</span> env</span><br><span class="line"></span><br><span class="line">env.roledefs = &#123;</span><br><span class="line">    <span class="string">&#x27;web&#x27;</span>: [<span class="string">&#x27;www1&#x27;</span>, <span class="string">&#x27;www2&#x27;</span>, <span class="string">&#x27;www3&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;dns&#x27;</span>: [<span class="string">&#x27;ns1&#x27;</span>, <span class="string">&#x27;ns2&#x27;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>角色定义并是可必须的，它只是能让我们方便的管理同样功能的服务器组。</p>
+<p>#2.如何构建主机列表(host lists) ?</p>
+<p>##2.1 四种主机定义方式</p>
+<p>###(1)Globally, via env<br>最常见的方式是通过设置 env: hosts and roles 。</p>
+<p>hosts和roles的值会在运行时进行检测，为每个task构造主机列表。</p>
+<p>####例子1： fabfile.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fabric.api <span class="keyword">import</span> env, run</span><br><span class="line"></span><br><span class="line">env.hosts = [<span class="string">&#x27;host1&#x27;</span>, <span class="string">&#x27;host2&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mytask</span>():</span><br><span class="line">    run(<span class="string">&#x27;ls /var/www&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>执行结果: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># fab mytask</span><br><span class="line">[host1] Executing task &#x27;mytask&#x27;</span><br><span class="line">[host1] run: ls /var/www</span><br><span class="line">[host1] out: cgi-bin  error	html  icons</span><br><span class="line">[host1] out:</span><br><span class="line"></span><br><span class="line">[host2] Executing task &#x27;mytask&#x27;</span><br><span class="line">[host2] run: ls /var/www</span><br><span class="line">[host2] out: cgi-bin  error	html  icons</span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... done.</span><br><span class="line">Disconnecting from host1... done.</span><br></pre></td></tr></table></figure>
+<p>####例子2： 动态设置env.hosts<br>我们可以在task中设置env.hosts, 它会影响接下来执行的tasks</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from fabric.api import env, run</span><br><span class="line"></span><br><span class="line">def set_hosts():</span><br><span class="line">    env.hosts = [&#x27;host1&#x27;, &#x27;host2&#x27;]</span><br><span class="line"></span><br><span class="line">def mytask():</span><br><span class="line">    run(&#x27;ls /var/www&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>执行命令: </p>
+<pre><code>fab set_hosts mytask
+</code></pre>
+<p>跟例子1是一样的效果。</p>
+<p>###(2)Globally, via the command line<br>你可在在模块中通过 env.hosts, env.roles, env.exclude_hosts 来定义主机，也可以通过命令行参数 <a target="_blank" rel="noopener" href="http://docs.fabfile.org/en/1.9/usage/fab.html#cmdoption-H">hosts/-H</a> 和 <a target="_blank" rel="noopener" href="http://docs.fabfile.org/en/1.9/usage/fab.html#cmdoption-R">–roles/-R</a> 来定义主机。</p>
+<p>例如: </p>
+<pre><code>$ fab -H host1,host2 mytask
+</code></pre>
+<p>非常重要的一点是：</p>
+<blockquote>
+<p>命令行参数会在fabfile文件载入方前被解释，所以fabfile文件中定义的env.hosts or env.roles会覆盖命令行参数。<br>如果你想合并它们,让在fabfile中使用 env.hosts.extend() 代替。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fabric.api <span class="keyword">import</span> env, run</span><br><span class="line"></span><br><span class="line">env.hosts.extend([<span class="string">&#x27;host3&#x27;</span>, <span class="string">&#x27;host4&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mytask</span>():</span><br><span class="line">    run(<span class="string">&#x27;ls /var/www&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>执行： fab -H host1,host2 mytask, 主机会包括： [‘host1’, ‘host2’, ‘host3’, ‘host4’]</p>
+<p>###(3)Per-task, via the command line<br>对每个task, 使用命令行定义hosts。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from fabric.api import run</span><br><span class="line"></span><br><span class="line">def mytask():</span><br><span class="line">    run(&#x27;ls /var/www&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>为mytask定义主机</p>
+<pre><code>$ fab mytask:hosts=&quot;host1;host2&quot;
+</code></pre>
+<p>这个会覆盖所有的主机列表，mytask只会在host1;host2中执行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> fabfile.py</span><br><span class="line">from fabric.api import <span class="built_in">env</span>, run</span><br><span class="line"></span><br><span class="line">def mytask():</span><br><span class="line">    run(<span class="string">&#x27;ls /var/www&#x27;</span>)</span><br><span class="line"></span><br><span class="line">$ fab mytask:hosts=<span class="string">&quot;host1;host2&quot;</span></span><br><span class="line">[host1] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host1] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host1] out: cgi-bin  error	html  icons</span><br><span class="line">[host1] out:</span><br><span class="line"></span><br><span class="line">[host2] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host2] out: cgi-bin  error	html  icons</span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host1... <span class="keyword">done</span>.</span><br></pre></td></tr></table></figure>
+
+
+<p>###(4)Per-task, via decorators</p>
+<p>可以针对每一个task, 可以使用 hosts 或 roles decorators。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fabric.api <span class="keyword">import</span> hosts, run</span><br><span class="line"></span><br><span class="line"><span class="meta">@hosts(<span class="params"><span class="string">&#x27;host1&#x27;</span>, <span class="string">&#x27;host2&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mytask</span>():</span><br><span class="line">    run(<span class="string">&#x27;ls /var/www&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>或者这样定义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">my_hosts = (&#x27;host1&#x27;, &#x27;host2&#x27;)</span><br><span class="line">@hosts(my_hosts)</span><br><span class="line">def mytask():</span><br><span class="line">    run(&#x27;ls /var/www&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>##2.2 主机定义的优先顺序</p>
+<p>官方说明： <a target="_blank" rel="noopener" href="http://docs.fabfile.org/en/1.9/usage/execution.html#order-of-precedence">Order of precedence</a></p>
+<ol>
+<li>Per-task, command-line host lists (fab mytask:host=host1) override absolutely everything else.</li>
+<li>Per-task, decorator-specified host lists (@hosts(‘host1’)) override the env variables.</li>
+<li>Globally specified host lists set in the fabfile (env.hosts = [‘host1’]) can override such lists set on the command-line, but only if you’re not careful (or want them to.)</li>
+<li>Globally specified host lists set on the command-line (–hosts=host1) will initialize the env variables, but that’s it.</li>
+</ol>
+<p>说明：</p>
+<ol>
+<li>Per-task, command-line host lists (fab mytask:host=host1) 会绝对覆盖所有的hosts定义。</li>
+<li>Per-task, decorator-specified host lists (@hosts(‘host1’)) 会覆盖 env 变量(env variables)。</li>
+<li>Globally specified host lists set in the fabfile (env.hosts = [‘host1’]) 会覆盖command-lin定义的主机列表。</li>
+<li>Globally specified host lists set on the command-line (–hosts=host1) 会初始化env 变量(env variables), 但仅仅如此。</li>
+</ol>
+<p>##2.3 测试<br>###2.3.1 测试1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fabric.api <span class="keyword">import</span> env, hosts, run</span><br><span class="line"></span><br><span class="line">env.hosts = [<span class="string">&#x27;host1&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mytask</span>():</span><br><span class="line">    run(<span class="string">&#x27;ls /var/www&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>执行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># fabfile定义的env.hosts会覆盖命令行的定义(-H)</span><br><span class="line">[root@fabserver fabric]# fab -H host2 mytask</span><br><span class="line">[host1] Executing task &#x27;mytask&#x27;</span><br><span class="line">[host1] run: ls /var/www</span><br><span class="line">[host1] out: cgi-bin  error	html  icons</span><br><span class="line">[host1] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host1... done.</span><br><span class="line"></span><br><span class="line"># 命令行task里面的主机定义会覆盖掉&quot;fabfile定义的env.hosts&quot;及&quot;命令行里的定义(-H)&quot;</span><br><span class="line">[root@fabserver fabric]# fab -H host2 mytask:hosts=host3</span><br><span class="line">[host3] Executing task &#x27;mytask&#x27;</span><br><span class="line">[host3] run: ls /var/www</span><br><span class="line">[host3] out: cgi-bin  error	html  icons</span><br><span class="line">[host3] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host3... done.</span><br></pre></td></tr></table></figure>
+
+
+<p>###2.3.2 测试2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from fabric.api import env, hosts, run</span><br><span class="line"></span><br><span class="line">env.hosts = [&#x27;host1&#x27;]</span><br><span class="line"></span><br><span class="line">@hosts(&#x27;host2&#x27;)</span><br><span class="line">def mytask():</span><br><span class="line">    run(&#x27;ls /var/www&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fabfile里面的task hosts定义会覆盖env.hosts定义</span></span><br><span class="line">[root@fabserver fabric]# fab mytask</span><br><span class="line">[host2] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host2] out: cgi-bin  error	html  icons</span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... <span class="keyword">done</span>.</span><br><span class="line">[root@fabserver fabric]# fab -H <span class="string">&#x27;host3&#x27;</span> mytask</span><br><span class="line">[host2] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host2] out: cgi-bin  error	html  icons</span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... <span class="keyword">done</span>.</span><br><span class="line">[root@fabserver fabric]# fab -H host3 mytask</span><br><span class="line">[host2] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host2] out: cgi-bin  error	html  icons</span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... <span class="keyword">done</span>.</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 命令行内的task hosts定义会覆盖所有定义</span></span><br><span class="line">[root@fabserver fabric]# fab -H host3 mytask:hosts=<span class="string">&quot;host1&quot;</span></span><br><span class="line">[host1] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host1] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host1] out: cgi-bin  error	html  icons</span><br><span class="line">[host1] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host1... <span class="keyword">done</span>.</span><br></pre></td></tr></table></figure>
+
+<p>#3. 其它</p>
+<p>##3.1 合并主机列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fabric.api <span class="keyword">import</span> env, hosts, roles, run</span><br><span class="line"></span><br><span class="line">env.roledefs = &#123;<span class="string">&#x27;role1&#x27;</span>: [<span class="string">&#x27;host2&#x27;</span>, <span class="string">&#x27;host3&#x27;</span>]&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@hosts(<span class="params"><span class="string">&#x27;host1&#x27;</span>, <span class="string">&#x27;host2&#x27;</span></span>)</span></span><br><span class="line"><span class="meta">@roles(<span class="params"><span class="string">&#x27;role1&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mytask</span>():</span><br><span class="line">    run(<span class="string">&#x27;ls /var/www&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>执行mytask时，[host1，host2，host3]都会执行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@fabserver fabric]# fab mytask</span><br><span class="line">[host1] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host1] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host1] out: cgi-bin  error	html  icons</span><br><span class="line">[host1] out:</span><br><span class="line"></span><br><span class="line">[host2] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host2] out: cgi-bin  error	html  icons</span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line">[host3] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host3] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host3] out: cgi-bin  error	html  icons</span><br><span class="line">[host3] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host3... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host1... <span class="keyword">done</span>.</span><br></pre></td></tr></table></figure>
+
+<p>##3.2 重复的主机<br>fabric会删除重复的host, 所以对于每个task,每个host只会执行一次。<br>如果不需要删除重复的主机，请设置 env.dedupe_hosts 为 False.</p>
+<p>例如，下面的host2会执行两次</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[root@fabserver fabric]# <span class="built_in">cat</span> fabfile.py</span><br><span class="line">from fabric.api import <span class="built_in">env</span>, hosts, roles, run</span><br><span class="line"></span><br><span class="line">env.roledefs = &#123;<span class="string">&#x27;role1&#x27;</span>: [<span class="string">&#x27;host2&#x27;</span>, <span class="string">&#x27;host3&#x27;</span>]&#125;</span><br><span class="line">env.dedupe_hosts = False</span><br><span class="line"></span><br><span class="line">@hosts(<span class="string">&#x27;host1&#x27;</span>, <span class="string">&#x27;host2&#x27;</span>)</span><br><span class="line">@roles(<span class="string">&#x27;role1&#x27;</span>)</span><br><span class="line">def mytask():</span><br><span class="line">    run(<span class="string">&#x27;ls /var/www&#x27;</span>)</span><br><span class="line"></span><br><span class="line">[root@fabserver fabric]# fab mytask</span><br><span class="line">[host1] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host1] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host1] out: cgi-bin  error	html  icons</span><br><span class="line">[host1] out:</span><br><span class="line"></span><br><span class="line">[host2] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host2] out: cgi-bin  error	html  icons</span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line">[host2] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host2] out: cgi-bin  error	html  icons</span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line">[host3] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host3] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host3] out: cgi-bin  error	html  icons</span><br><span class="line">[host3] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host3... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host1... <span class="keyword">done</span>.</span><br></pre></td></tr></table></figure>
+
+<p>##3.3 不包含指定的主机<br>在命令行中使用 –exclude-hosts/-x 定义</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">[root@fabserver fabric]# <span class="built_in">cat</span> fabfile.py</span><br><span class="line">from fabric.api import <span class="built_in">env</span>, hosts, roles, run</span><br><span class="line"></span><br><span class="line">env.roledefs = &#123;<span class="string">&#x27;role1&#x27;</span>: [<span class="string">&#x27;host2&#x27;</span>, <span class="string">&#x27;host3&#x27;</span>]&#125;</span><br><span class="line"></span><br><span class="line">@hosts(<span class="string">&#x27;host1&#x27;</span>, <span class="string">&#x27;host2&#x27;</span>)</span><br><span class="line">@roles(<span class="string">&#x27;role1&#x27;</span>)</span><br><span class="line">def mytask():</span><br><span class="line">    run(<span class="string">&#x27;ls /var/www&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#注意，这里声明排除host1是不起作用的</span></span><br><span class="line">[root@fabserver fabric]# fab mytask -x host1</span><br><span class="line">[host1] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host1] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host1] out: cgi-bin  error	html  icons</span><br><span class="line">[host1] out:</span><br><span class="line"></span><br><span class="line">[host2] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host2] out: cgi-bin  error	html  icons</span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line">[host3] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host3] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host3] out: cgi-bin  error	html  icons</span><br><span class="line">[host3] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host3... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host1... <span class="keyword">done</span>.</span><br><span class="line"></span><br><span class="line"><span class="comment">#成功排除host1</span></span><br><span class="line">[root@fabserver fabric]# fab mytask:exclude_hosts=<span class="string">&quot;host1&quot;</span></span><br><span class="line">[host2] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host2] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host2] out: cgi-bin  error	html  icons</span><br><span class="line">[host2] out:</span><br><span class="line"></span><br><span class="line">[host3] Executing task <span class="string">&#x27;mytask&#x27;</span></span><br><span class="line">[host3] run: <span class="built_in">ls</span> /var/www</span><br><span class="line">[host3] out: cgi-bin  error	html  icons</span><br><span class="line">[host3] out:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">Disconnecting from host2... <span class="keyword">done</span>.</span><br><span class="line">Disconnecting from host3... <span class="keyword">done</span>.</span><br></pre></td></tr></table></figure>
+
+<p>注意：<br>Host exclusion lists 跟 host lists 一样，是不能在不同的级别(level)合并在一起的。</p>
+<p>例如：全局的 -x 选项不会影响到per-task host list 设置的。同样的per-task的exclude_hosts会影响全局的-H 定义的主机列表。</p>
+<p>##3.4 使用execute智能执行task<br>###3.4.1 智能执行task</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from fabric.api import env, run, roles, execute</span><br><span class="line"></span><br><span class="line">env.roledefs = &#123;</span><br><span class="line">    &#x27;db&#x27;: [&#x27;host1&#x27;, &#x27;host2&#x27;],</span><br><span class="line">    &#x27;web&#x27;: [&#x27;host3&#x27;],</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@roles(&#x27;db&#x27;)</span><br><span class="line">def migrate():</span><br><span class="line">    # Database stuff here.</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">@roles(&#x27;web&#x27;)</span><br><span class="line">def update():</span><br><span class="line">    # Code updates here.</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">def deploy():</span><br><span class="line">    execute(migrate)</span><br><span class="line">    execute(update)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>执行 $ fab migrate update 和 $ fab deploy 是一样的效果。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@fabserver fabric]# fab migrate update</span><br><span class="line">[host1] Executing task <span class="string">&#x27;migrate&#x27;</span></span><br><span class="line">[host2] Executing task <span class="string">&#x27;migrate&#x27;</span></span><br><span class="line">[host3] Executing task <span class="string">&#x27;update&#x27;</span></span><br><span class="line"></span><br><span class="line">Done.</span><br><span class="line">[root@fabserver fabric]# fab deploy</span><br><span class="line">[host1] Executing task <span class="string">&#x27;migrate&#x27;</span></span><br><span class="line">[host2] Executing task <span class="string">&#x27;migrate&#x27;</span></span><br><span class="line">[host3] Executing task <span class="string">&#x27;update&#x27;</span></span><br><span class="line"></span><br><span class="line">Done.</span><br></pre></td></tr></table></figure>
+
+<p>###3.4.2 动态设置主机列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fabric.api <span class="keyword">import</span> run, execute, task</span><br><span class="line"></span><br><span class="line"><span class="comment"># For example, code talking to an HTTP API, or a database, or ...</span></span><br><span class="line"><span class="keyword">from</span> mylib <span class="keyword">import</span> external_datastore</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the actual algorithm involved. It does not care about host</span></span><br><span class="line"><span class="comment"># lists at all.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">do_work</span>():</span><br><span class="line">    run(<span class="string">&quot;something interesting on a host&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the user-facing task invoked on the command line.</span></span><br><span class="line"><span class="meta">@task</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">deploy</span>(<span class="params">lookup_param</span>):</span><br><span class="line">    <span class="comment"># This is the magic you don&#x27;t get with @hosts or @roles.</span></span><br><span class="line">    <span class="comment"># Even lazy-loading roles require you to declare available roles</span></span><br><span class="line">    <span class="comment"># beforehand. Here, the sky is the limit.</span></span><br><span class="line">    host_list = external_datastore.query(lookup_param)</span><br><span class="line">    <span class="comment"># Put this dynamically generated host list together with the work to be</span></span><br><span class="line">    <span class="comment"># done.</span></span><br><span class="line">    execute(do_work, hosts=host_list)</span><br></pre></td></tr></table></figure>
+
+<p>发布到app服务主机</p>
+<pre><code>$ fab deploy:app
+</code></pre>
+<p>发布到db服务主机</p>
+<pre><code>$ fab deploy:db
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/08/11/learning-fabric-1-overview-and-tutorial/" rel="prev" title="Fabric-01 安装与使用">
+      <i class="fa fa-chevron-left"></i> Fabric-01 安装与使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/08/30/learning-fabric3-fab/" rel="next" title="Fabric-03 fab命令">
+      Fabric-03 fab命令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lie"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">lie</p>
+  <div class="site-description" itemprop="description">Yesterday You Said Tomorrow</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2012 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿烈</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'cab274acde8887facde4',
+      clientSecret: 'e6816fb20c02f5a6d9d50bc1228a5c738f87d350',
+      repo        : 'quxionglie.github.io',
+      owner       : 'quxionglie',
+      admin       : ['quxionglie'],
+      id          : '9ca77417ced9c1c5f554eaa1b4e917e5',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
