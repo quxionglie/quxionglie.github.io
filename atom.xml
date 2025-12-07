@@ -6,7 +6,7 @@
   <link href="https://www.quxionglie.com/atom.xml" rel="self"/>
   
   <link href="https://www.quxionglie.com/"/>
-  <updated>2025-12-07T12:29:31.603Z</updated>
+  <updated>2025-12-07T12:34:27.398Z</updated>
   <id>https://www.quxionglie.com/</id>
   
   <author>
@@ -17,14 +17,14 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>浅谈比赛奖金与积分计算</title>
+    <title>浅谈比赛奖金与对战积分计算</title>
     <link href="https://www.quxionglie.com/2025/08/21/game-prize-money-and-points-calculation/"/>
     <id>https://www.quxionglie.com/2025/08/21/game-prize-money-and-points-calculation/</id>
     <published>2025-08-21T09:29:30.000Z</published>
-    <updated>2025-12-07T12:29:31.603Z</updated>
+    <updated>2025-12-07T12:34:27.398Z</updated>
     
     
-    <summary type="html">&lt;p&gt;比赛奖金和积分计算因项目而异，但通常基于比赛级别（重要性）和参赛成绩（名次、胜负），奖金是直接的经济回报，积分则影响世界/地区排名、种子排位及资格获取，高奖金赛事通常积分也高；&lt;/p&gt;
+    <summary type="html">&lt;p&gt;比赛奖金和对战积分计算因项目而异，但通常基于比赛级别（重要性）和参赛成绩（名次、胜负），奖金是直接的经济回报，积分则影响世界/地区排名、种子排位及资格获取，高奖金赛事通常积分也高；&lt;/p&gt;
 &lt;p&gt;排名越高奖金越多，但具体分配规则因赛事而异：奖金池和个人/队伍的分配比例、排名对应奖金（如冠军、亚军、季军、八强、十六强）都不同，有的奖金甚至可达数千万甚至上亿美元。&lt;/p&gt;
 &lt;p&gt;本文介绍:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;(1) 如何根据排名进行奖金分配才是合理的？
