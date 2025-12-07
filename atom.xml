@@ -6,7 +6,7 @@
   <link href="https://www.quxionglie.com/atom.xml" rel="self"/>
   
   <link href="https://www.quxionglie.com/"/>
-  <updated>2025-02-28T01:29:41.495Z</updated>
+  <updated>2025-12-07T11:09:53.275Z</updated>
   <id>https://www.quxionglie.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈比赛奖金与积分计算</title>
+    <link href="https://www.quxionglie.com/2025/08/21/game-prize-money-and-points-calculation/"/>
+    <id>https://www.quxionglie.com/2025/08/21/game-prize-money-and-points-calculation/</id>
+    <published>2025-08-21T09:29:30.000Z</published>
+    <updated>2025-12-07T11:09:53.275Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;比赛奖金和积分计算因项目而异，但通常基于比赛级别（重要性）和参赛成绩（名次、胜负），奖金是直接的经济回报，积分则影响世界/地区排名、种子排位及资格获取，高奖金赛事通常积分也高；&lt;/p&gt;
+&lt;p&gt;比赛排名与奖金通常直接挂钩，排名越高奖金越多，但具体分配规则因赛事而异：奖金池和个人/队伍的分配比例、排名对应奖金（如冠军、亚军、季军、八强、十六强）都不同，有的奖金甚至可达数千万甚至上亿美元。&lt;/p&gt;
+&lt;p&gt;本文介绍:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(1) 如何根据排名进行奖金分配才是合理的？
+
+(2) 比赛的胜负如何影响选手(或队列)积分？
+&lt;/code&gt;&lt;/pre&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>回归github pages</title>
@@ -358,23 +379,6 @@
     
     
     <summary type="html">&lt;p&gt;上文进到，如果我们要安装几十上百台服务器，如何做呢？总不能一台一台人工安装吧！&lt;br&gt;本文就来解决这个问题，看一下如何实现批量无人值守安装centos5.8 x64。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://www.quxionglie.com/categories/linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>linux系列1-centos5.8 x64安装过程</title>
-    <link href="https://www.quxionglie.com/2013/01/22/linux01-install-centos5-dot-8-x64-process/"/>
-    <id>https://www.quxionglie.com/2013/01/22/linux01-install-centos5-dot-8-x64-process/</id>
-    <published>2013-01-22T09:05:00.000Z</published>
-    <updated>2025-02-28T01:29:41.492Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;对于linux初学者来说，鸟哥的linux私房菜是很好的学习教材了。&lt;br&gt;我也是从linux初学者这条路走过来的,目前正在研究linux运维的技术。对于自已学过的东西，总希望留点脚印(但愿不是坑)，让大家少走点弯路。于是想写下这一系列的教程。  &lt;/p&gt;</summary>
     
     
     
