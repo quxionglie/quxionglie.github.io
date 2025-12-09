@@ -92,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
+    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -101,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
+    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -191,15 +191,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/01/04/newer-should-be-known-in-mac/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2013/01/16/import-spring-source-code-into-myeclipse/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -210,6 +201,15 @@
   
   <url>
     <loc>https://www.quxionglie.com/2013/01/22/linux01-install-centos5-dot-8-x64-process/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2013/01/04/newer-should-be-known-in-mac/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -263,15 +263,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2012/03/23/managing-hierarchical-data-in-oracle-1/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -299,7 +290,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
+    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -309,6 +300,15 @@
   
   <url>
     <loc>https://www.quxionglie.com/2012/03/26/managing-hierarchical-data-in-oracle-4/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -358,13 +358,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/mac/</loc>
-    <lastmod>2025-12-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/categories/spring/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -373,6 +366,13 @@
   
   <url>
     <loc>https://www.quxionglie.com/categories/linux/</loc>
+    <lastmod>2025-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/categories/mac/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
