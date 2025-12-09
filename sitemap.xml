@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.quxionglie.com/2023/12/27/learn-linux-notes/</loc>
+    
+    <lastmod>2025-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/2025/10/07/What-technology-fields-have-I-missed-out-on-in-the-last-15-years/</loc>
     
     <lastmod>2025-12-09</lastmod>
@@ -74,15 +83,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -92,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/03/21/java-gc-basic/</loc>
+    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -102,6 +102,15 @@
   
   <url>
     <loc>https://www.quxionglie.com/2015/03/31/from-octopress-to-jekyll/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2015/03/21/java-gc-basic/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -218,15 +227,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2013/03/03/install-android-development-environment-in-mac/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -237,6 +237,15 @@
   
   <url>
     <loc>https://www.quxionglie.com/2013/02/18/install-lua-in-mac-os/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -263,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/25/managing-hierarchical-data-in-oracle-3/</loc>
+    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -272,7 +281,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
+    <loc>https://www.quxionglie.com/2012/03/25/managing-hierarchical-data-in-oracle-3/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -368,13 +377,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/gradle/</loc>
-    <lastmod>2025-12-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/categories/android/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -383,6 +385,13 @@
   
   <url>
     <loc>https://www.quxionglie.com/categories/lua/</loc>
+    <lastmod>2025-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/categories/gradle/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -424,14 +433,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>https://www.quxionglie.com/categories/hexo/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/hexo/</loc>
+    <loc>https://www.quxionglie.com/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

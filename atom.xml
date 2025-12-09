@@ -54,6 +54,28 @@
   </entry>
   
   <entry>
+    <title>linux 学习笔记</title>
+    <link href="https://www.quxionglie.com/2023/12/27/learn-linux-notes/"/>
+    <id>https://www.quxionglie.com/2023/12/27/learn-linux-notes/</id>
+    <published>2023-12-27T09:19:12.000Z</published>
+    <updated>2025-12-09T09:25:25.812Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;点击 &lt;a href=&quot;https://www.quxionglie.com/learn-linux-notes/&quot;&gt;linux 学习笔记&lt;/a&gt; 查看在线版本。&lt;/p&gt;
+&lt;p&gt;本书通过 mdbook 发布。&lt;/p&gt;
+&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; cl</summary>
+      
+    
+    
+    
+    <category term="linux" scheme="https://www.quxionglie.com/categories/linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>回归github pages</title>
     <link href="https://www.quxionglie.com/2019/05/20/come-back-github/"/>
     <id>https://www.quxionglie.com/2019/05/20/come-back-github/</id>
@@ -365,23 +387,6 @@
     
     
     <category term="gradle" scheme="https://www.quxionglie.com/categories/gradle/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Centos6.3上编译OpenJDK7源码</title>
-    <link href="https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/"/>
-    <id>https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/</id>
-    <published>2013-02-16T07:56:00.000Z</published>
-    <updated>2025-02-28T01:29:41.492Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;本文包括4部分内容：&lt;br&gt;1.基本流程（阅读README和README-builds.html）&lt;br&gt;2.安装基础软件包&lt;br&gt;3.配置变量&lt;br&gt;4.检查环境是否配置ok与编译jdk源码  &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="java" scheme="https://www.quxionglie.com/categories/java/"/>
     
     
   </entry>
