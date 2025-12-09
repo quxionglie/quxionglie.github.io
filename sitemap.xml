@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.quxionglie.com/2018/01/08/2017-team-annual-summary/</loc>
+    
+    <lastmod>2025-12-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/2023/12/27/learn-linux-notes/</loc>
     
     <lastmod>2025-12-09</lastmod>
@@ -83,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
+    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -92,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
+    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -137,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/06/29/IntelliJ-IDEA-keymap/</loc>
+    <loc>https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -146,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/</loc>
+    <loc>https://www.quxionglie.com/2013/06/29/IntelliJ-IDEA-keymap/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -164,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/09/linuxxi-lie-4-pxe-plus-dhcp-plus-nfs-plus-kickstartwu-ren-zhi-shou-pi-liang-an-zhuang-centos6-dot-3-x64/</loc>
+    <loc>https://www.quxionglie.com/2013/07/17/linux-03-permission/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -173,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/07/17/linux-03-permission/</loc>
+    <loc>https://www.quxionglie.com/2014/08/09/linuxxi-lie-4-pxe-plus-dhcp-plus-nfs-plus-kickstartwu-ren-zhi-shou-pi-liang-an-zhuang-centos6-dot-3-x64/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -227,6 +236,15 @@
   </url>
   
   <url>
+    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/2013/02/18/install-lua-in-mac-os/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -245,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
+    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -255,15 +273,6 @@
   
   <url>
     <loc>https://www.quxionglie.com/2012/03/23/managing-hierarchical-data-in-oracle-1/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -290,6 +299,15 @@
   </url>
   
   <url>
+    <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/2012/03/26/managing-hierarchical-data-in-oracle-4/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -300,15 +318,6 @@
   
   <url>
     <loc>https://www.quxionglie.com/2013/01/03/start-here-2013/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -335,14 +344,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/plan/</loc>
+    <loc>https://www.quxionglie.com/categories/dev/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/dev/</loc>
+    <loc>https://www.quxionglie.com/categories/plan/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -377,6 +386,13 @@
   </url>
   
   <url>
+    <loc>https://www.quxionglie.com/categories/gradle/</loc>
+    <lastmod>2025-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/categories/lua/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -391,7 +407,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/gradle/</loc>
+    <loc>https://www.quxionglie.com/categories/vpn/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -399,13 +415,6 @@
   
   <url>
     <loc>https://www.quxionglie.com/categories/idea/</loc>
-    <lastmod>2025-12-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/categories/vpn/</loc>
     <lastmod>2025-12-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

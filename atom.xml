@@ -91,6 +91,22 @@
   </entry>
   
   <entry>
+    <title>2017年金融开发组总结</title>
+    <link href="https://www.quxionglie.com/2018/01/08/2017-team-annual-summary/"/>
+    <id>https://www.quxionglie.com/2018/01/08/2017-team-annual-summary/</id>
+    <published>2018-01-08T02:29:29.000Z</published>
+    <updated>2025-12-09T15:13:17.666Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本文主要回顾了2017年项目组的工作概况、成员构成以及当时采用的项目开发流程、经验教训和2018年改进建议。&lt;/p&gt;
+&lt;p&gt;我在2018年1月时写了此文档，并在整个分公司技术部内(不仅是组内)进行了阐述和讨论。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>从Jekyll迁移到Hexo</title>
     <link href="https://www.quxionglie.com/2017/01/26/jekyll-to-hexo/"/>
     <id>https://www.quxionglie.com/2017/01/26/jekyll-to-hexo/</id>
@@ -367,23 +383,6 @@
     
     
     <category term="lua" scheme="https://www.quxionglie.com/categories/lua/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>使用gradle构建项目01-建立项目目录结构 </title>
-    <link href="https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/"/>
-    <id>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</id>
-    <published>2013-02-17T14:01:00.000Z</published>
-    <updated>2025-02-28T01:29:41.492Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;gradle的目录的结构规范和maven是一样的，我们来看一下Maven标准目录结构  &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="gradle" scheme="https://www.quxionglie.com/categories/gradle/"/>
     
     
   </entry>
