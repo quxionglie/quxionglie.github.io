@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.quxionglie.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="电子圈是一个社交平台，但是目前电子圈用户的行为并不能沉淀为内容，导致产品没有持续性;圈内的问答质量不高、活动较少，导致参与的人数不多、范围不广。分享只能活跃气氛，如果电子圈没有直指人心的功能，用户也很快会流失。 如果想用户激励及悬赏模式有不错的效果,需要清楚两件事：  电子圈核心功能是什么? 电子圈种子用户在哪里?   2025年备注：电子圈是专门为电子行业从业人员开发的社交网站，是电子行业最大的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电子圈：如何构建一个用户激励及悬赏模式">
+<meta property="og:url" content="https://www.quxionglie.com/2014/04/10/how-to-build-a-user-incentive-and-reward-model/index.html">
+<meta property="og:site_name" content="阿烈的博客">
+<meta property="og:description" content="电子圈是一个社交平台，但是目前电子圈用户的行为并不能沉淀为内容，导致产品没有持续性;圈内的问答质量不高、活动较少，导致参与的人数不多、范围不广。分享只能活跃气氛，如果电子圈没有直指人心的功能，用户也很快会流失。 如果想用户激励及悬赏模式有不错的效果,需要清楚两件事：  电子圈核心功能是什么? 电子圈种子用户在哪里?   2025年备注：电子圈是专门为电子行业从业人员开发的社交网站，是电子行业最大的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.quxionglie.com/images/2014/dianziq/dianziq.png">
+<meta property="article:published_time" content="2014-04-10T12:21:43.000Z">
+<meta property="article:modified_time" content="2025-12-10T12:42:11.451Z">
+<meta property="article:author" content="lie">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.quxionglie.com/images/2014/dianziq/dianziq.png">
+
+<link rel="canonical" href="https://www.quxionglie.com/2014/04/10/how-to-build-a-user-incentive-and-reward-model/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>电子圈：如何构建一个用户激励及悬赏模式 | 阿烈的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?36175c8b1958d080e840f34fc69cf52d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="阿烈的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">阿烈的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code,Write,Enjoy life!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2014/04/10/how-to-build-a-user-incentive-and-reward-model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          电子圈：如何构建一个用户激励及悬赏模式
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2014-04-10 20:21:43" itemprop="dateCreated datePublished" datetime="2014-04-10T20:21:43+08:00">2014-04-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>电子圈是一个社交平台，但是目前电子圈用户的行为并不能沉淀为内容，导致产品没有持续性;圈内的问答质量不高、活动较少，导致参与的人数不多、范围不广。分享只能活跃气氛，如果电子圈没有直指人心的功能，用户也很快会流失。</p>
+<p>如果想用户激励及悬赏模式有不错的效果,需要清楚两件事：</p>
+<ol>
+<li>电子圈核心功能是什么?</li>
+<li>电子圈种子用户在哪里?</li>
+</ol>
+<blockquote>
+<p>2025年备注：<br>电子圈是专门为电子行业从业人员开发的社交网站，是电子行业最大的真实社交网站，不仅可以在里面参加行业里各种聚会、研讨会及展览会，结识同行，相互认识交流，拓展行业人脉，还可以向行业的专家提问得到他们的帮助及解答。<br>本文我写于2014年，仅在内部讨论。在博客上发表是在2025年。</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="1-核心功能是什么"><a href="#1-核心功能是什么" class="headerlink" title="1.核心功能是什么?"></a>1.核心功能是什么?</h1><blockquote>
+<p>产品一定要简单，把核心功能能打磨得非常锋利。其它非核心的功能可以先不做。首先使用核心功能来试验市场。如果核心功能能够打动市场，再安排人力、时间来开发二级功能。如果核心功能不能打动市场，二级功能做得再好，也不能打动市场。</p>
+</blockquote>
+<p>一个产品做得好，必定是有某些地方满足了用户的需要。</p>
+<p>这几个月以来，电子圈的部分工作重心都放在”分享”上面。社交应用固然需要热闹，但技术类的社区更需要有质量的内容来支撑。单是靠”<br>今天深圳雨很大”和发一些过时的新闻是不能触动用户的心。用户的热情很快会褪去，接着便会离开，许多人不会重新再打开这个应用。目前的分享不会是电子圈的核心功能，只能是二级功能。</p>
+<p>社交就是能找到对的人，并能有效的传递信息、交流思想。但如何找到对的人?</p>
+<p>事实上每个用户都有身份标志(行业/公司/职位，只能是一个参考选项),一个用户身份的重要程度，必须通过用户的对社区(行业)<br>的贡献来体现。用户提的问题和回答(赞和评论)<br>、用户参加或组织的活动都是用户对社区做出的有用的贡献。用户的性格，知识经验、人际关系等都能从用户的行为轨迹中体现出来。你对社区的贡献越大，就说明你越值得别人去信任。你在社区的所有动作别人都能看得到，别人就越能与你达到有效的沟通(<br>两个彼此对对方都一无所知的人如何沟通?)。</p>
+<p>目前分享的内容，没有太大参考的价值。如果没有许多高质量的问答和活动，分享的存在只会降低社区的质量。</p>
+<h1 id="2-种子用户在哪里"><a href="#2-种子用户在哪里" class="headerlink" title="2.种子用户在哪里?"></a>2.种子用户在哪里?</h1><blockquote>
+<p>一个刚上线不久的产品，种子用户非常重要。一方面他们在使用并传播你的产品，另一方面他们给你反馈。一个社交产品，早期的种子用户也决定了未来社区的氛围和风格。他们每时每刻都会为你良好的用户口碑传播。</p>
+</blockquote>
+<p>按理说，创业时代做电子类会展业务对电子圈是一种优势, 因为行业里许多人我们都会接触到。在电子圈发展初期，从里面挑出部分在各个领域里比较权威、有影响力的人做电子圈的种子用户不会是十分困难的。<br>但是电子圈在经过了多次展会活动及营销推广之后，我们有了多少种子用户?<br>我们的种子用户从哪里来？展会上?…<br>我们为他们归类了吗?<br>我们的种子用户有影响力吗？是典型的用户吗?<br>我们动用一切资源留住种子用户的心了吗?<br>我们是否每天都在用不同的马甲来激励他们。<br>…</p>
+<h1 id="3-用户激励怎么做"><a href="#3-用户激励怎么做" class="headerlink" title="3. 用户激励怎么做?"></a>3. 用户激励怎么做?</h1><p>如何引导用户在电子圈上完成一个行为?</p>
+<p>实际上引导就是交换。你必须给他某种好处(必须是他认为对他有好处)，以换取他的一个行为。这种好处可能是物质层面的(展会抽奖的奖品、求赞送我回家的车票等)或者是精神层面的东西。一个技术社区的用户的最大满足就是自己的行为能得到别人的赞同和认可。同时，一个普通用户给你的赞和李开复给你的赞，得到的满足感是不一样的，所以电子圈必须要区分出用户的等级出来。这种等级我们要用用户对社区的贡献大小来区分，而像用户那种每天只是登录，随意的看一看，其实对社区的内容是没有什么大贡献的。</p>
+<p>此外像给人贴专家、名人等标签的，效果也不好。现在的伪专家这么多，谁知道你是真的还是假的。</p>
+<p>具体的激励做法，可以参考stackoverflow的做法。</p>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p>stackoverflow 是一个很重视社区质量建设的问答网站。每个用户都有自己的荣誉(reputation)。荣誉是用来衡量社区信任你的程度。荣誉越多，在网站上享受的特殊待遇就越多。<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/help/whats-reputation">http://stackoverflow.com/help/whats-reputation</a><br>列出几条关键的<br>操作 需要的荣誉值<br>提出问题或回答问题 1<br>… …<br>投赞成票 15<br>给管理员做提示标记 15<br>留评论 50<br>编辑社区的 wiki 页面 100<br>投反对票 125(同时自身荣誉降1）<br>… …</p>
+<p>一个刚注册的用户(荣誉reputation为1)，只能提出问题或回答问题。想投赞成票荣誉必须要到15, 投反对票荣誉必须要到125(<br>投反对票同时自身荣誉降1)。荣誉到50才能评论别人。你可以看到任何人的荣誉值及来源。当荣誉高的人赞同或评论你的时候，你的满足感就非常强烈。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>需要的荣誉值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>提出问题或回答问题</td>
+<td>1</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>投赞成票</td>
+<td>15</td>
+</tr>
+<tr>
+<td>给管理员做提示标记</td>
+<td>15</td>
+</tr>
+<tr>
+<td>留评论</td>
+<td>50</td>
+</tr>
+<tr>
+<td>编辑社区的 wiki 页面</td>
+<td>100</td>
+</tr>
+<tr>
+<td>投反对票</td>
+<td>125(同时自身荣誉降1）</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody></table>
+<p>一个刚注册的用户(荣誉reputation为1)，只能提出问题或回答问题。想投赞成票荣誉必须要到15, 投反对票荣誉必须要到125(投反对票同时自身荣誉降1)。荣誉到50才能评论别人。你可以看到任何人的荣誉值及来源。当荣誉高的人赞同或评论你的时候，你的满足感就非常强烈。<br>那么荣誉如何获得呢?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">操作					荣誉</span><br><span class="line">你的回答收到赞成票		+10</span><br><span class="line">你的提问收到赞成票		+5</span><br><span class="line">你的回答被接受为答案	+15（同时提问者+2）</span><br><span class="line">你的提问收到反对票		-2</span><br><span class="line">你的回答收到反对票		-2（同时投票者-1）</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>stackoverflow的这种荣誉和投票机制赋予了每个用户参与社区建设的权利和义务。只要你有一定的荣誉，你就能做一些影响社区的事情，但是反过来，你得尊重社区，很多事情不是你有荣誉就能为所欲为的，必须经过很多人的投票才能给出评判。</p>
+<p>查看用户的荣誉的来源,如<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/users/922184/mysticial">http://stackoverflow.com/users/922184/mysticial</a></p>
+<p><img src="/images/2014/dianziq/dianziq.png" alt="Alt text"></p>
+<p>通过对比我们就会发现，在电子圈内，有些用户的操作太过随意了。例如一个用户在电子圈注册后，就可以随意的对回答投赞成或反对票。一个人没有对圈内做出贡献，没有被别人所信任，他所做动作的价值是不大的，他投出的反对票还会对圈内产生负面的影响。相反地，如果是用户对你的问题或回答有过理解后(从他们的对社区的贡献大小及行为轨迹就知道)才做出行为,你的感觉就会不一样。</p>
+<p>所以目前电子圈有效的激励应该是：主要针对我们的核心功能，针对我们的用户(主要是种子用户)，让他们在电子圈上能感到(强烈的)满足,让他们能对社区做出更多有用的贡献(有质量的问答或活动)。任何对社区里的行为，都应该是真实中肯的(不会是马甲的行为),都是经过思考后才产生的。任何做出行为的人都是值提信任的。电子圈对任何人的信任度都可以使用一个值去度量。由此而促进电子圈的良性发展。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2013/07/17/linux-03-permission/" rel="prev" title="linux系列3 - 文件与目录权限">
+      <i class="fa fa-chevron-left"></i> linux系列3 - 文件与目录权限
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/08/09/linuxxi-lie-4-pxe-plus-dhcp-plus-nfs-plus-kickstartwu-ren-zhi-shou-pi-liang-an-zhuang-centos6-dot-3-x64/" rel="next" title="linux系列4 - pxe+dhcp+nfs+kickstart无人值守批量安装Centos6.x x64">
+      linux系列4 - pxe+dhcp+nfs+kickstart无人值守批量安装Centos6.x x64 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">1.核心功能是什么?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%A7%8D%E5%AD%90%E7%94%A8%E6%88%B7%E5%9C%A8%E5%93%AA%E9%87%8C"><span class="nav-number">2.</span> <span class="nav-text">2.种子用户在哪里?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E7%94%A8%E6%88%B7%E6%BF%80%E5%8A%B1%E6%80%8E%E4%B9%88%E5%81%9A"><span class="nav-number">3.</span> <span class="nav-text">3. 用户激励怎么做?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%96%99"><span class="nav-number">3.1.</span> <span class="nav-text">资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lie"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">lie</p>
+  <div class="site-description" itemprop="description">Yesterday You Said Tomorrow</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2012 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿烈</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'cab274acde8887facde4',
+      clientSecret: 'e6816fb20c02f5a6d9d50bc1228a5c738f87d350',
+      repo        : 'quxionglie.github.io',
+      owner       : 'quxionglie',
+      admin       : ['quxionglie'],
+      id          : 'c416b105048264db6c07980a18e9decd',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

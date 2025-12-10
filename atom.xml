@@ -277,6 +277,29 @@
   </entry>
   
   <entry>
+    <title>电子圈：如何构建一个用户激励及悬赏模式</title>
+    <link href="https://www.quxionglie.com/2014/04/10/how-to-build-a-user-incentive-and-reward-model/"/>
+    <id>https://www.quxionglie.com/2014/04/10/how-to-build-a-user-incentive-and-reward-model/</id>
+    <published>2014-04-10T12:21:43.000Z</published>
+    <updated>2025-12-10T12:42:11.451Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;电子圈是一个社交平台，但是目前电子圈用户的行为并不能沉淀为内容，导致产品没有持续性;圈内的问答质量不高、活动较少，导致参与的人数不多、范围不广。分享只能活跃气氛，如果电子圈没有直指人心的功能，用户也很快会流失。&lt;/p&gt;
+&lt;p&gt;如果想用户激励及悬赏模式有不错的效果,需要清楚两件事：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;电子圈核心功能是什么?&lt;/li&gt;
+&lt;li&gt;电子圈种子用户在哪里?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;2025年备注：&lt;br&gt;电子圈是专门为电子行业从业人员开发的社交网站，是电子行业最大的真实社交网站，不仅可以在里面参加行业里各种聚会、研讨会及展览会，结识同行，相互认识交流，拓展行业人脉，还可以向行业的专家提问得到他们的帮助及解答。&lt;br&gt;本文我写于2014年，仅在内部讨论。在博客上发表是在2025年。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>linux系列3 - 文件与目录权限</title>
     <link href="https://www.quxionglie.com/2013/07/17/linux-03-permission/"/>
     <id>https://www.quxionglie.com/2013/07/17/linux-03-permission/</id>
@@ -366,23 +389,6 @@
     
     
     <category term="android" scheme="https://www.quxionglie.com/categories/android/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>在MacOS上安装lua</title>
-    <link href="https://www.quxionglie.com/2013/02/18/install-lua-in-mac-os/"/>
-    <id>https://www.quxionglie.com/2013/02/18/install-lua-in-mac-os/</id>
-    <published>2013-02-18T06:32:00.000Z</published>
-    <updated>2025-02-28T01:29:41.492Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;下午心血来潮，想在MacOS上安装lua，但使用brew install lua安装lua报错，于是使用源码安装。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="lua" scheme="https://www.quxionglie.com/categories/lua/"/>
     
     
   </entry>
