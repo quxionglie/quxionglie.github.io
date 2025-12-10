@@ -92,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/11/learning-fabric-1-overview-and-tutorial/</loc>
+    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -101,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
+    <loc>https://www.quxionglie.com/2014/08/11/learning-fabric-1-overview-and-tutorial/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -155,15 +155,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2013/06/29/IntelliJ-IDEA-keymap/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -174,6 +165,15 @@
   
   <url>
     <loc>https://www.quxionglie.com/2013/07/16/gradle-02-basic-use/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -200,7 +200,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/01/16/import-spring-source-code-into-myeclipse/</loc>
+    <loc>https://www.quxionglie.com/2013/01/04/newer-should-be-known-in-mac/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -209,7 +209,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/01/04/newer-should-be-known-in-mac/</loc>
+    <loc>https://www.quxionglie.com/2013/01/16/import-spring-source-code-into-myeclipse/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -281,7 +281,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
+    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -290,7 +290,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
+    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -317,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/01/03/start-here-2013/</loc>
+    <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -326,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
+    <loc>https://www.quxionglie.com/2013/01/03/start-here-2013/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -353,14 +353,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/plan/</loc>
+    <loc>https://www.quxionglie.com/categories/dev/</loc>
     <lastmod>2025-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/dev/</loc>
+    <loc>https://www.quxionglie.com/categories/mac/</loc>
     <lastmod>2025-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -374,7 +374,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/mac/</loc>
+    <loc>https://www.quxionglie.com/categories/plan/</loc>
     <lastmod>2025-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -416,14 +416,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/vpn/</loc>
+    <loc>https://www.quxionglie.com/categories/idea/</loc>
     <lastmod>2025-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/idea/</loc>
+    <loc>https://www.quxionglie.com/categories/vpn/</loc>
     <lastmod>2025-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
