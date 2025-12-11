@@ -73,6 +73,26 @@
   </entry>
   
   <entry>
+    <title>容器环境下的java程序配置</title>
+    <link href="https://www.quxionglie.com/2023/11/01/java-programs-in-a-container-environment/"/>
+    <id>https://www.quxionglie.com/2023/11/01/java-programs-in-a-container-environment/</id>
+    <published>2023-11-01T13:23:02.000Z</published>
+    <updated>2025-12-11T14:55:25.436Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;容器（Docker / Kubernetes）环境下运行 Java 程序确实经常出现问题，原因并不是 Java 自身不兼容容器，而是 JVM 在容器内对资源的默认认知与实际情况不一致，导致各种性能、内存、CPU 的异常。&lt;/p&gt;
+&lt;p&gt;如果不正确配置，会导致：&lt;/p&gt;
+&lt;u</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>回归github pages</title>
     <link href="https://www.quxionglie.com/2019/05/20/come-back-github/"/>
     <id>https://www.quxionglie.com/2019/05/20/come-back-github/</id>
@@ -366,29 +386,6 @@
     
     
     <category term="vpn" scheme="https://www.quxionglie.com/categories/vpn/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Mac下Android开发环境搭建</title>
-    <link href="https://www.quxionglie.com/2013/03/03/install-android-development-environment-in-mac/"/>
-    <id>https://www.quxionglie.com/2013/03/03/install-android-development-environment-in-mac/</id>
-    <published>2013-03-03T03:33:00.000Z</published>
-    <updated>2025-02-28T01:29:41.492Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;基本步骤：   &lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;下载Eclipse IDE   &lt;/li&gt;
-&lt;li&gt;下载安装配置Android SDK    &lt;/li&gt;
-&lt;li&gt;安装Android ADT Plugin  &lt;/li&gt;
-&lt;li&gt;Eclipse中配置Android套件  &lt;/li&gt;
-&lt;/ol&gt;</summary>
-    
-    
-    
-    <category term="android" scheme="https://www.quxionglie.com/categories/android/"/>
     
     
   </entry>
