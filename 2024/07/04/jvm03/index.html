@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm03_07.jpg">
 <meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm03_08.jpg">
 <meta property="article:published_time" content="2024-07-04T12:10:09.000Z">
-<meta property="article:modified_time" content="2025-12-14T13:34:28.601Z">
+<meta property="article:modified_time" content="2025-12-14T14:32:25.584Z">
 <meta property="article:author" content="lie">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://www.quxionglie.com/images/2024/jvm/jvm03_01.png">
@@ -240,7 +240,14 @@
 <li>   本地方法栈中JNI（即一般说的Native方法）的引用的对象。</li>
 </ol>
 <p><img src="/images/2024/jvm/jvm03_02.jpg" alt="Alt text"><br>上图中，对象Object6、Object7、Object8虽然互相引用，但他们的GC Roots是不可到达的，所以它们将会被判定为是可回收的对象。</p>
-<h1 id="2-什么时候回收垃圾对象"><a href="#2-什么时候回收垃圾对象" class="headerlink" title="2.什么时候回收垃圾对象"></a>2.什么时候回收垃圾对象</h1><h2 id="2-1-分代"><a href="#2-1-分代" class="headerlink" title="2.1.    分代"></a>2.1.    分代</h2><p><img src="/images/2024/jvm/jvm03_03.png" alt="Alt text"></p>
+<h1 id="2-什么时候回收垃圾对象"><a href="#2-什么时候回收垃圾对象" class="headerlink" title="2.什么时候回收垃圾对象"></a>2.什么时候回收垃圾对象</h1><p>GC的触发时机通常是内存空间不足时。</p>
+<ul>
+<li><p>不同的垃圾收集器有不同的触发策略，例如在Java中：<br>新生代（Young Generation）的Eden区满时会触发Minor GC。<br>老年代（Old Generation）空间不足时会触发Major GC或Full GC。</p>
+</li>
+<li><p>现代的并发垃圾收集器（如CMS、G1、ZGC）还会在用户线程运行的同时进行标记和回收过程，以减少应用停顿时间（Stop The World, STW）。</p>
+</li>
+</ul>
+<h2 id="2-1-分代"><a href="#2-1-分代" class="headerlink" title="2.1.    分代"></a>2.1.    分代</h2><p><img src="/images/2024/jvm/jvm03_03.png" alt="Alt text"></p>
 <p>虚拟机中的共划分为三个代：新生代（Young Generation）、旧生代（Old Generation）和持久代（Permanent Generation）。其中持久代与GC关系不大。新生代和旧生代的划分是对垃圾收集影响比较大的。<br>分代的垃圾回收策略，是基于这样一个事实：不同的对象的生命周期是不一样的。因此，不同生命周期的对象可以采取不同的收集方式，以便提高回收效率。</p>
 <h3 id="2-1-1-新生代-Young-Generation"><a href="#2-1-1-新生代-Young-Generation" class="headerlink" title="2.1.1.    新生代(Young Generation)"></a>2.1.1.    新生代(Young Generation)</h3><p>所有新生成的对象首先都是放在新生代的。新生代的目标就是尽可能快速的收集掉那些生命周期短的对象。<br>新生代分三个区。一个Eden区，两个Survivor区(称为S0,S1)。大部分对象在Eden区中生成。当Eden区满时，还存活的对象将被复制到Survivor区（两个中的一个,这里我们假设为S1），当这个S1满时，此区的存活对象将被复制到S0，当这个S0也满了的时候，从S1复制过来的并且此时还存活的对象，将被复制到”旧生代”。需要注意，Survivor的两个区是对称的，没先后关系，所以同一个区中可能同时存在从Eden复制过来对象和从前一个Survivor复制过来的对象，而复制到旧生代的只有从第一个Survivor区过来的对象。而且，Survivor区总有一个是空的。</p>
 <h3 id="2-1-2-旧生代（Old-Generation-Tenuring-Generation）"><a href="#2-1-2-旧生代（Old-Generation-Tenuring-Generation）" class="headerlink" title="2.1.2.    旧生代（Old Generation/Tenuring Generation）"></a>2.1.2.    旧生代（Old Generation/Tenuring Generation）</h3><p>在新生代中经历了N次垃圾回收后仍然存活的对象，就会被放到旧生代中。因此，可以认为旧生代中存放的都是一些生命周期较长的对象。<br>数据进入旧生代的3个途径：</p>
