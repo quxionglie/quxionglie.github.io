@@ -168,6 +168,305 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/07/17/linux-03-permission/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/07/17/linux-03-permission/" class="post-title-link" itemprop="url">linux系列3 - 文件与目录权限</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2013-07-17 12:45:00" itemprop="dateCreated datePublished" datetime="2013-07-17T12:45:00+08:00">2013-07-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本文的内容如下： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1.linux权限表示   </span><br><span class="line">1.1 数字表示法  </span><br><span class="line">1.2 字符表示化  </span><br><span class="line"></span><br><span class="line">2. linux权限相关命令  </span><br><span class="line">	2.1.改变权限属性命令chmod</span><br><span class="line">	2.2.改变文件所属关系命令chown  </span><br><span class="line"></span><br><span class="line">3.linux文件及目录权限总结   </span><br><span class="line">4.权限测试前期准备   </span><br><span class="line">5.测试user1用户浏览非自己拥有的目录/user2的权限  </span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2013/07/17/linux-03-permission/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/07/16/gradle-02-basic-use/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/07/16/gradle-02-basic-use/" class="post-title-link" itemprop="url">使用gradle构建项目02-基础使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2013-07-16 12:01:00" itemprop="dateCreated datePublished" datetime="2013-07-16T12:01:00+08:00">2013-07-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/gradle/" itemprop="url" rel="index"><span itemprop="name">gradle</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本文包括以下内容：<br>(1)lib导入/导出<br>(2)代码导入eclipse或IDEA<br>(3)代码执行(java程序与web项目)<br>(4)根据项目环境(local,dev,product等)打包     </p>
+<p>建议大家遇到问题，先查看一下官方的文档，内容已经非常详细了。<br><a target="_blank" rel="noopener" href="http://www.gradle.org/documentation">http://www.gradle.org/documentation</a>  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2013/07/16/gradle-02-basic-use/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/06/29/IntelliJ-IDEA-keymap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/06/29/IntelliJ-IDEA-keymap/" class="post-title-link" itemprop="url">【转】常用IDEA快捷键</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2013-06-29 09:00:00" itemprop="dateCreated datePublished" datetime="2013-06-29T09:00:00+08:00">2013-06-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/idea/" itemprop="url" rel="index"><span itemprop="name">idea</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近已经从eclipse转到IntelliJ IDEA，IDEA用起来太顺手了，许多功能正合我意。<br>看到时光印记写的一篇《常用IDEA快捷键》真的不错，特转一下!  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2013/06/29/IntelliJ-IDEA-keymap/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/" class="post-title-link" itemprop="url">centos6.2 64bit上安装pptp与客户端设置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2013-04-14 10:53:00" itemprop="dateCreated datePublished" datetime="2013-04-14T10:53:00+08:00">2013-04-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vpn/" itemprop="url" rel="index"><span itemprop="name">vpn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>主要内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#1.安装软件包</span><br><span class="line">#2.vi /etc/pptpd.conf 文件</span><br><span class="line">#3.vi /etc/ppp/options.pptpd</span><br><span class="line">#4.设置使用 pptpd 的用户名和密码</span><br><span class="line">#5.修改内核设置/etc/sysctl.conf</span><br><span class="line">#6.添加 iptables 转发规则</span><br><span class="line">#7.启动pptpd 服务</span><br><span class="line">#8.一键安装shell脚本</span><br><span class="line">#9.pptp客户端连接</span><br><span class="line">#10.客户端vpn翻墙设置</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/03/03/install-android-development-environment-in-mac/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -614,342 +913,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/01/16/import-spring-source-code-into-myeclipse/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="lie">
-      <meta itemprop="description" content="Yesterday You Said Tomorrow">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿烈的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/01/16/import-spring-source-code-into-myeclipse/" class="post-title-link" itemprop="url">导入spring3.2源码到myeclipse中</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2013-01-16 16:31:00" itemprop="dateCreated datePublished" datetime="2013-01-16T16:31:00+08:00">2013-01-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>spring3.2通过新的基于Gradle的构建来构建项目，它取代了之前的Ant+Ivy系统。<br>本文就介绍如何将spring3.2的源码导入到myeclipse中。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2013/01/16/import-spring-source-code-into-myeclipse/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/01/04/newer-should-be-known-in-mac/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="lie">
-      <meta itemprop="description" content="Yesterday You Said Tomorrow">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿烈的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/01/04/newer-should-be-known-in-mac/" class="post-title-link" itemprop="url">mac新手必备</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2013-01-04 19:46:00" itemprop="dateCreated datePublished" datetime="2013-01-04T19:46:00+08:00">2013-01-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>mac必备工具集</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2013/01/04/newer-should-be-known-in-mac/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/01/03/start-here-2013/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="lie">
-      <meta itemprop="description" content="Yesterday You Said Tomorrow">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿烈的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/01/03/start-here-2013/" class="post-title-link" itemprop="url">2012简单总结与2013展望</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2013-01-03 23:00:00" itemprop="dateCreated datePublished" datetime="2013-01-03T23:00:00+08:00">2013-01-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/plan/" itemprop="url" rel="index"><span itemprop="name">plan</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2012年主要做了几件事：<br>（1）年初时，自学了一阵linux运维，但由于学习效率太低。于是到了四月份，就拜师学艺了。从六月份到现在一直坚持在学习。初级运维算是没问题了，现在是在研究中级运维的知识。收获是蛮大的，有时候早上起来听视频写文档，周未也窝在家研究，半年下来，linux基本原理、100多个命令操作、系统安装与调优、软件的安装与配置与调优等等都基本OK了。<br>（2）下半年研究起了JVM调优方面的知识，现在也是有点心得，跟Q群的人在YY上做了一次分享。<br>（3）本来想学习hadoop的，由于时间关系，只能放到明年了。<br>（4）12月份研究了一下lucene的源码。知道了搜索引擎的理论上的知识，只看了lucene索引部分的源码，搜索部分还要抽时间精力完善,文档也待补充。  </p>
-<p>2013年计划：<br>（1）继续学习linux运维(中高级)的知识。初级运维的基本都是单机房的问题，现在开始研究多机房的问题。    2013-06-29 写下了许多文档，部分问题还要钻研！<br>（2）学习大数据处理Hadoop。<br>2013-06-29 正在跟tigerfish 学hadoop<br>（3）学习数据分析与处理，也顺便研究一下数学方面的知识。现在已经花了400RMB报了tigerfish一个R语言学习班,不知道学完是否能拿回300RMB先？<br>2013-06-29 已完成，获优异证书。学习也有所获<br>（4）工作学习的PC转到MacBook Pro上。<br>2013-06-29 离不开她了！<br>（5）全面实践GTD与番茄工作法。<br>（6）最重要的一点：计划每个月写4、5篇博客，一年下来能坚持写50篇左右。<br>（7）熟悉python。虽然现在能用python写点简单的东西，但离精通还远着呢！<br>（8）坚持看英文原版图书。目前有两本书-《High Performance MySQL》，《MySQL High Availability》待看。<br>（9）研究jdk(部分)、spring等框架底层源码  </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2012/05/12/team-thinking/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="lie">
-      <meta itemprop="description" content="Yesterday You Said Tomorrow">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿烈的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2012/05/12/team-thinking/" class="post-title-link" itemprop="url">关于团队一些思考</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2012-05-12 16:16:00" itemprop="dateCreated datePublished" datetime="2012-05-12T16:16:00+08:00">2012-05-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/dev/" itemprop="url" rel="index"><span itemprop="name">dev</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.	团队思考</span><br><span class="line"> 1.1.	toruk框架的启示</span><br><span class="line"> 1.2.	hui99的问题</span><br><span class="line"> 1.3.	cmmi3评估中暴露的问题</span><br><span class="line">  (1)	杨ting在访谈前背&quot;答案&quot;时才知道OSSP是什么？</span><br><span class="line">  (2)	我们作为“编码测试”人员，在访谈时却被问了许多需求设计、配置、QA的问题，我们几个人都没回答上来。</span><br><span class="line"> 1.4.	代码是否可以共享?</span><br><span class="line">2. 员工、团队与成长</span><br><span class="line">3. 总结</span><br></pre></td></tr></table></figure>
-
-<h1 id="团队思考"><a href="#团队思考" class="headerlink" title="团队思考"></a>团队思考</h1><h2 id="toruk框架的启示"><a href="#toruk框架的启示" class="headerlink" title="toruk框架的启示"></a>toruk框架的启示</h2><p>toruk框架目标</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a)	相对于hui99使用的spring+ibatis2框架（或其它框架），使开发过程更加简单，提高效率;</span><br><span class="line">b)	使公司具有不可替代的元素。turuk便是其中之一。</span><br></pre></td></tr></table></figure>
-
-<p>(1)    如果想开发过程简单，是否有更好的开源框架(技术/方案)?<br>如使用spring3 REST风格，使用Spring的注释式编程！<br>(2)    如果非要开发toruk，是否数据库这块可重用ibatis2而不是重新造轮子？<br>(3)    部分项目已经使用了toruk框架，可能以后还有项目会用到。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">toruk的研发人员全部离职之后，toruk框架的理念、技术、知识、代码真的传下来了吗？</span><br><span class="line">还有人非常了解toruk的源码吗？</span><br><span class="line">还有人去主导toruk的研发吗？</span><br><span class="line">toruk存在的bug，还会有人去fix吗?</span><br><span class="line">toruk还会在公司存活多久呢？</span><br></pre></td></tr></table></figure>
-
-<p>(4)    toruk（或其它）的知识为什么没有完全成为公司的财产，而随着人员的流失而流失了？是什么原因造成了这些问题？</p>
-<h2 id="hui99的问题"><a href="#hui99的问题" class="headerlink" title="hui99的问题"></a>hui99的问题</h2><p>hui99有很多频道：机票、酒店、旅游、团购、租车、购物、电子优惠券、手机充值、社区等, 还有一个IVR系统在使用！去年年底的时候又加了一个分销商/积分系统上去。当初开发分配任务时，基本上都是每个频道由某个人单独负责的。从去年开始，陆续有人离职了，项目转由我整体负责了。但我对其它各频道业务不是很清楚，而相关负责的人已经离职，没有留下太多的文档（或文档已经过时），代码风格不一（包括缩进、代码的格式化都或多或少有点问题）、结构混乱,中间夹杂点小bug，也确实让人头痛。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(1)	“每个人按照频道划分开发任务”，这种任务分配的模式是否过时？</span><br><span class="line">或者说每个频道的功能还可以分得细一点，然后团队一起开发。或每个频道进行交叉开发。</span><br><span class="line">(2)	开发过程中，团队间是否可以评审一下代码，而保持风格的一致性?</span><br><span class="line">(3)	同事离职了，你怎样才能更快的理解他的负责频道（或模块）业务和代码？</span><br></pre></td></tr></table></figure>
-
-<h2 id="cmmi3评估中暴露的问题"><a href="#cmmi3评估中暴露的问题" class="headerlink" title="cmmi3评估中暴露的问题"></a>cmmi3评估中暴露的问题</h2><p>公司今年过完年之后，确定实施CMMI3评审，而评审工作在4月份开始进行。两个月时间，四个项目(三个虚假项目),上千个文档需要准备。4月10多号开始背”答案”，4月22日开始访谈，我是作为”编码测试”人员进行访谈的。<br>    评审过程中，有两件事情让我印象比较深刻：</p>
-<h3 id="杨ting在访谈前背”答案”时才知道OSSP是什么？"><a href="#杨ting在访谈前背”答案”时才知道OSSP是什么？" class="headerlink" title="杨ting在访谈前背”答案”时才知道OSSP是什么？"></a>杨ting在访谈前背”答案”时才知道OSSP是什么？</h3><p>她已经写文档两个月了，所有的CMMI3的流程和文档都是根据OSSP来编写的。<br>这是谁的问题？个人问题？石老师(培训老师)的问题？CMMI负责人的问题？公司培训的问题？…<br>这到底是什么问题？如何去解决这个问题？</p>
-<h3 id="我们作为“编码测试”人员，在访谈时却被问了许多需求设计、配置、QA的问题，我们几个人都没回答上来。"><a href="#我们作为“编码测试”人员，在访谈时却被问了许多需求设计、配置、QA的问题，我们几个人都没回答上来。" class="headerlink" title="我们作为“编码测试”人员，在访谈时却被问了许多需求设计、配置、QA的问题，我们几个人都没回答上来。"></a>我们作为“编码测试”人员，在访谈时却被问了许多需求设计、配置、QA的问题，我们几个人都没回答上来。</h3><p>几天背”答案”下来没有什么效果，主任评估师都没问到（你想让他问的）问题上。CMMI中编码测试不是编码测试人员的问题，团队成员间的工作都是有关联的。<br>在团队中，你知道别人做的具体工作吗？你知道别人的工作对你的影响吗？你真的知道你负责工作的内容吗？</p>
-<h2 id="代码是否可以共享"><a href="#代码是否可以共享" class="headerlink" title="代码是否可以共享?"></a>代码是否可以共享?</h2><p>去年年底的时候，建行团要改版（代理商版）。<br>具体的开发任务分配是：国栋负责平台后台、我负责分行后台、杨文涛负责商户后台。其中有一个功能模块：团购商品状态转换的, 平台、分行、商户后台都有涉及到，商户后台只有”提交审核”的操作，但分行后台和平台后台包括商品状态的所有操作。<br>基本功能介绍如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">商品状态：暂存、待审核、上架。</span><br><span class="line">相关操作有：提交审核、上架、下架、重新编辑。</span><br><span class="line">状态转换关系是：</span><br><span class="line">暂存		－提交审核	－&gt;	待审核</span><br><span class="line">待审核	－上架	    －&gt;	上架</span><br><span class="line">上架		－下架       －&gt;	待审核</span><br><span class="line">待审核	－重新编辑	－&gt; 暂存</span><br></pre></td></tr></table></figure>
-<p>我在任务确定后，就忙着做其它项目去了。我一回来，就code自已负责的代码去了。</p>
-<p>但问题来了,状态转换的操作我是通过商品状态机类ProductStateMachine实现的，其它地方要用的话直接调就行了，商户后台这边则是直接操作数据库。同样的功能，实现的方式不同，方法的命名不同，若不修改就会给后期的维护带来问题。</p>
-<p>为什么会出现此类的问题呢？任务确定之后，各人只埋头负责自己的部分，而完全不理会其他人的工作，只要功能实现了，其它的都是小问题。事实真的是这样吗？当别人提出你的功能有更好的实现方案时，所有人都会心甘情愿的修改自己”辛辛苦苦”写的代码吗？团队代码风格、方法命名等如何保持一致呢？…</p>
-<p>你也许会觉得责任在于分配任务的人，为什么分的任务会有交叉呢？但(1)是人总会犯点错;(2)这就好像项目的成败决定于分配任务的人一样，个人决定成败，而非整个团队。</p>
-<p>可以思考的问题：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)	任务为什么要这么分？是不是可以做得更好？</span><br><span class="line">(2)	代码是否可以共享?</span><br></pre></td></tr></table></figure>
-
-<h1 id="员工、团队与成长"><a href="#员工、团队与成长" class="headerlink" title="员工、团队与成长"></a>员工、团队与成长</h1><p>新人进公司一年多来快速成长了吗?如果没成长，是招聘时看错人了吗？是员工的个人问题，还是公司或团队本身的问题？</p>
-<p>公司需要生存发展，员工需要更好的工资(尤其是物价在疯涨的时候)、更好的发展，公司与员工是互相博弈的过程。</p>
-<p>薪资不高、没有发展、没有成长，这不是在耽误人家的宝贵青春吗？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">但公司的发展靠的是人啊？</span><br><span class="line">(1)	好的氛围，才会引入、留住好的人。</span><br><span class="line">(2)	好的人，才会有好的制度，并且保持好这个制度，毕竟制度是人定的。</span><br><span class="line">(3)	好的人和好的制度，才会遇到好的客户。</span><br></pre></td></tr></table></figure>
-
-<p>是先有项目才有人，还是有了人，才会有项目？</p>
-<p>做项目是仅仅为了做项目吗？如何打造一个全面成功的项目？</p>
-<p>项目开发中，团队真的在成长吗？</p>
-<p>《走出软件作坊》     阿朱</p>
-<blockquote>
-<p>在项目管理中，我发现人是最重要的，但是很遗憾，总是能看到不少心胸狭窄、眼光短浅的老板，把员工当傻瓜，把客户当傻子。其实人对了，世界就对了。</p>
-</blockquote>
-<p>《从优秀到卓越》    柯林斯</p>
-<blockquote>
-<p>实现跨越公司的领导者首先是设法得到合适的人才（不合适的下车），然后才决定将汽车开向何方。</p>
-</blockquote>
-<p> 五年思想工作者 梦想风暴</p>
-<blockquote>
-<p>去年带了一个项目，在那个项目里，我做了一个尝试。我把项目的目标订在了人才培养，而非传统意义的交付。于是，在这个过程中，我花了大量的精力去教新员工写代码，帮他们设定个人成长目标，教他们做事，带着他们吃好玩好……就是这样一个几乎都是由新ThoughtWorker——甚至大多是毕业生——组成的项目组，后来，这个项目成了Michael Chen口中最接近他心目中全面成功的项目。</p>
-</blockquote>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>员工离职之后，知识、经验会留下来吗？</li>
-<li>团队中的知识在流通吗？</li>
-<li>项目中，团队成员在成长吗？团队在成长吗？团队会反思总结吗？</li>
-<li>除了员工自我驱动外，公司有为员工做过职业规划吗？</li>
-<li>团队怎样才能写出更好的代码(Beautiful Code)？</li>
-</ul>
-<hr>
-<p>你需要什么样的团队?</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1021,7 +984,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

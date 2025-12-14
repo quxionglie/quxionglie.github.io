@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.quxionglie.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="编程语言引入垃圾回收（Garbage Collection, GC）机制的核心目的是为了自动化内存管理，从而解放程序员，让他们能够专注于编写程序逻辑，而不是手动管理内存的分配和释放。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM - 01 为什么有垃圾回收">
+<meta property="og:url" content="https://www.quxionglie.com/2024/06/30/jvm01/index.html">
+<meta property="og:site_name" content="阿烈的博客">
+<meta property="og:description" content="编程语言引入垃圾回收（Garbage Collection, GC）机制的核心目的是为了自动化内存管理，从而解放程序员，让他们能够专注于编写程序逻辑，而不是手动管理内存的分配和释放。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-30T13:23:02.000Z">
+<meta property="article:modified_time" content="2025-12-14T13:29:06.240Z">
+<meta property="article:author" content="lie">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.quxionglie.com/2024/06/30/jvm01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JVM - 01 为什么有垃圾回收 | 阿烈的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?36175c8b1958d080e840f34fc69cf52d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="阿烈的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">阿烈的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code,Write,Enjoy life!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2024/06/30/jvm01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JVM - 01 为什么有垃圾回收
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-30 21:23:02" itemprop="dateCreated datePublished" datetime="2024-06-30T21:23:02+08:00">2024-06-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>编程语言引入垃圾回收（Garbage Collection, GC）机制的核心目的是为了自动化内存管理，从而解放程序员，让他们能够专注于编写程序逻辑，而不是手动管理内存的分配和释放。</p>
+<span id="more"></span>
+<h1 id="为什么要有GC"><a href="#为什么要有GC" class="headerlink" title="为什么要有GC"></a>为什么要有GC</h1><p>主要原因和解决的问题包括：</p>
+<ul>
+<li>防止内存泄漏： 在C/C++等需要手动内存管理的语言中，如果程序员忘记释放不再使用的内存，就会导致内存泄漏，程序运行时间越长，消耗的内存越多，最终可能导致程序崩溃。GC机制会自动识别并回收这些“垃圾”对象。</li>
+<li>避免野指针/悬空指针： 当一块内存被手动释放后，如果程序仍然试图访问它，就会导致不可预测的行为甚至程序崩溃（野指针）。GC系统确保只有在确定没有任何引用指向某块内存时才进行回收，从而避免了这类安全隐患。</li>
+<li>提高开发效率： 手动管理内存是一项复杂且容易出错的任务，尤其是在大型复杂系统中。自动化GC极大地减轻了开发者的负担，提高了开发效率和代码的健壮性。</li>
+<li>提升内存安全： 垃圾回收是一种自动内存管理形式，是许多现代编程语言（如 Java, Python, JavaScript, Go）实现内存安全的关键部分，减少了因内存管理错误导致的安全漏洞。</li>
+</ul>
+<p>例如KFC中每一个桌子都代表一个一块内存空间,顾客代表一段程序。顾客点餐并找到了桌子吃汉堡，此时桌子被占用(系统分出去了一段内存),吃完后顾客离去(程序执行完)。顾客离去时,C/C++要求顾客自己将桌面打扫干净，当顾客拒绝清理或忘记清理时，后面的顾客发现没有桌子可以吃饭了(无法分配内存)。于是KFC关门了(程序崩溃了)。</p>
+<p>JAVA的做法是：总有服务生(垃圾收集器线程)在不停的打扫卫生。当发现顾客离去时, 自动的收拾桌子(发现并回收内存)。</p>
+<h1 id="各语言GC对比"><a href="#各语言GC对比" class="headerlink" title="各语言GC对比"></a>各语言GC对比</h1><table>
+<thead>
+<tr>
+<th>语言</th>
+<th>是否有GC</th>
+<th>主要机制</th>
+<th>核心特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Java</td>
+<td>是</td>
+<td>追踪式（分代、并行、并发）</td>
+<td>高度复杂和可调优，注重吞吐量和低延迟。</td>
+</tr>
+<tr>
+<td>Go</td>
+<td>是</td>
+<td>追踪式（并发、非分代）</td>
+<td>追求极致的低延迟和快速启动，无分代设计</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>是</td>
+<td>引用计数 + 标记-清除</td>
+<td>混合策略，解决循环引用问题</td>
+</tr>
+<tr>
+<td>Rust</td>
+<td>无</td>
+<td>无 GC（RAII/所有权系统）</td>
+<td>通过编译期规则保证内存安全，零运行时开销</td>
+</tr>
+</tbody></table>
+<p>Rust 为何不需要 GC？</p>
+<ul>
+<li>每块内存都有唯一的所有者</li>
+<li>当所有者离开作用域时，内存会自动释放</li>
+<li>编译器在编译期检查是否有非法访问、悬空引用等</li>
+</ul>
+<p>所以，虽然没有垃圾回收器在运行时扫描内存，Rust 仍然能确保内存安全。</p>
+<h1 id="GC的代价是什么？为什么不是所有语言都用？"><a href="#GC的代价是什么？为什么不是所有语言都用？" class="headerlink" title="GC的代价是什么？为什么不是所有语言都用？"></a>GC的代价是什么？为什么不是所有语言都用？</h1><p>GC（垃圾回收）的代价：用“运行时成本 + 不确定性”，换“安全性 + 开发效率”。</p>
+<h2 id="1-不可预测的暂停（Stop-The-World）"><a href="#1-不可预测的暂停（Stop-The-World）" class="headerlink" title="(1). 不可预测的暂停（Stop-The-World）"></a>(1). 不可预测的暂停（Stop-The-World）</h2><p>某些 GC 阶段会暂停应用线程<br>对硬实时系统不友好</p>
+<h2 id="2-额外内存开销"><a href="#2-额外内存开销" class="headerlink" title="(2). 额外内存开销"></a>(2). 额外内存开销</h2><p>对象头<br>标记位<br>GC 元数据</p>
+<h2 id="3-启动慢、内存占用高（你前面问过-Java-容器问题）"><a href="#3-启动慢、内存占用高（你前面问过-Java-容器问题）" class="headerlink" title="(3). 启动慢、内存占用高（你前面问过 Java 容器问题）"></a>(3). 启动慢、内存占用高（你前面问过 Java 容器问题）</h2><p>JVM 启动<br>堆预留<br>GC 线程</p>
+<p>这就是为什么：</p>
+<ul>
+<li>C / C++ 仍用于内核、驱动</li>
+<li>Rust 选择无 GC + 所有权模型</li>
+<li>Java 在容器 / Serverless 场景下有劣势</li>
+</ul>
+<p>垃圾回收机制通过牺牲一定的运行时性能（GC过程本身需要时间和计算资源），换取了更高的编程效率、更安全的代码和更稳定的程序运行。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/javase/17/gctuning/introduction-garbage-collection-tuning.html">HotSpot Virtual Machine Garbage Collection Tuning Guide</a><br><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/10513">杨晓峰 - Java常见的垃圾收集器有哪些？</a><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2034573">C++ 为什么不加入垃圾回收机制</a></p>
+<p>– end – </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/27/learn-linux-notes/" rel="prev" title="《Linux学习笔记》集合">
+      <i class="fa fa-chevron-left"></i> 《Linux学习笔记》集合
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/03/jvm02/" rel="next" title="JVM - 02 Java常见垃圾收集器">
+      JVM - 02 Java常见垃圾收集器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89GC"><span class="nav-number">1.</span> <span class="nav-text">为什么要有GC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%84%E8%AF%AD%E8%A8%80GC%E5%AF%B9%E6%AF%94"><span class="nav-number">2.</span> <span class="nav-text">各语言GC对比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GC%E7%9A%84%E4%BB%A3%E4%BB%B7%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E8%AF%AD%E8%A8%80%E9%83%BD%E7%94%A8%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">GC的代价是什么？为什么不是所有语言都用？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8D%E5%8F%AF%E9%A2%84%E6%B5%8B%E7%9A%84%E6%9A%82%E5%81%9C%EF%BC%88Stop-The-World%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">(1). 不可预测的暂停（Stop-The-World）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%A2%9D%E5%A4%96%E5%86%85%E5%AD%98%E5%BC%80%E9%94%80"><span class="nav-number">3.2.</span> <span class="nav-text">(2). 额外内存开销</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%90%AF%E5%8A%A8%E6%85%A2%E3%80%81%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E9%AB%98%EF%BC%88%E4%BD%A0%E5%89%8D%E9%9D%A2%E9%97%AE%E8%BF%87-Java-%E5%AE%B9%E5%99%A8%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">(3). 启动慢、内存占用高（你前面问过 Java 容器问题）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lie"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">lie</p>
+  <div class="site-description" itemprop="description">Yesterday You Said Tomorrow</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2012 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿烈</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'cab274acde8887facde4',
+      clientSecret: 'e6816fb20c02f5a6d9d50bc1228a5c738f87d350',
+      repo        : 'quxionglie.github.io',
+      owner       : 'quxionglie',
+      admin       : ['quxionglie'],
+      id          : '9ed06e3cb4fda6152c65cca29863cf7f',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

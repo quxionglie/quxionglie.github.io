@@ -54,6 +54,74 @@
   </entry>
   
   <entry>
+    <title>JVM - 04 java垃圾收集器：串行/并行收集器</title>
+    <link href="https://www.quxionglie.com/2024/07/05/jvm04/"/>
+    <id>https://www.quxionglie.com/2024/07/05/jvm04/</id>
+    <published>2024-07-05T12:00:00.000Z</published>
+    <updated>2025-12-14T13:56:24.603Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;串行收集器使用单线程来执行所有的垃圾收集工作。&lt;br&gt;并行收集器（也称吞吐量收集器，Throughput Collector）使用多线程并行执行垃圾收集操作。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="jvm" scheme="https://www.quxionglie.com/categories/jvm/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JVM - 03 java如何进行垃圾回收</title>
+    <link href="https://www.quxionglie.com/2024/07/04/jvm03/"/>
+    <id>https://www.quxionglie.com/2024/07/04/jvm03/</id>
+    <published>2024-07-04T12:10:09.000Z</published>
+    <updated>2025-12-14T13:34:28.601Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;垃圾收集器需要处理的三个问题：&lt;br&gt;(1)    哪些对象需要回收?&lt;br&gt;(2)    什么时候回收垃圾对象?&lt;br&gt;(3)    如何回收垃圾对象?&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="jvm" scheme="https://www.quxionglie.com/categories/jvm/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JVM - 02 Java常见垃圾收集器</title>
+    <link href="https://www.quxionglie.com/2024/07/03/jvm02/"/>
+    <id>https://www.quxionglie.com/2024/07/03/jvm02/</id>
+    <published>2024-07-03T00:00:02.000Z</published>
+    <updated>2025-12-14T13:29:13.272Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Java虚拟机（JVM）提供了多种垃圾收集器（Garbage Collector, GC），每种收集器都有其独特的设计目标和权衡考量，以满足不同应用场景的需求。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="jvm" scheme="https://www.quxionglie.com/categories/jvm/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JVM - 01 为什么有垃圾回收</title>
+    <link href="https://www.quxionglie.com/2024/06/30/jvm01/"/>
+    <id>https://www.quxionglie.com/2024/06/30/jvm01/</id>
+    <published>2024-06-30T13:23:02.000Z</published>
+    <updated>2025-12-14T13:29:06.240Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;编程语言引入垃圾回收（Garbage Collection, GC）机制的核心目的是为了自动化内存管理，从而解放程序员，让他们能够专注于编写程序逻辑，而不是手动管理内存的分配和释放。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="jvm" scheme="https://www.quxionglie.com/categories/jvm/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>《Linux学习笔记》集合</title>
     <link href="https://www.quxionglie.com/2023/12/27/learn-linux-notes/"/>
     <id>https://www.quxionglie.com/2023/12/27/learn-linux-notes/</id>
@@ -310,77 +378,6 @@
 &lt;/blockquote&gt;</summary>
     
     
-    
-    
-  </entry>
-  
-  <entry>
-    <title>linux系列3 - 文件与目录权限</title>
-    <link href="https://www.quxionglie.com/2013/07/17/linux-03-permission/"/>
-    <id>https://www.quxionglie.com/2013/07/17/linux-03-permission/</id>
-    <published>2013-07-17T04:45:00.000Z</published>
-    <updated>2025-02-28T01:29:41.493Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;本文的内容如下： &lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1.linux权限表示   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1.1 数字表示法  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;1.2 字符表示化  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2. linux权限相关命令  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	2.1.改变权限属性命令chmod&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	2.2.改变文件所属关系命令chown  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3.linux文件及目录权限总结   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4.权限测试前期准备   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5.测试user1用户浏览非自己拥有的目录/user2的权限  &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://www.quxionglie.com/categories/linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>使用gradle构建项目02-基础使用</title>
-    <link href="https://www.quxionglie.com/2013/07/16/gradle-02-basic-use/"/>
-    <id>https://www.quxionglie.com/2013/07/16/gradle-02-basic-use/</id>
-    <published>2013-07-16T04:01:00.000Z</published>
-    <updated>2025-02-28T01:29:41.493Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;本文包括以下内容：&lt;br&gt;(1)lib导入/导出&lt;br&gt;(2)代码导入eclipse或IDEA&lt;br&gt;(3)代码执行(java程序与web项目)&lt;br&gt;(4)根据项目环境(local,dev,product等)打包     &lt;/p&gt;
-&lt;p&gt;建议大家遇到问题，先查看一下官方的文档，内容已经非常详细了。&lt;br&gt;&lt;a href=&quot;http://www.gradle.org/documentation&quot;&gt;http://www.gradle.org/documentation&lt;/a&gt;  &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="gradle" scheme="https://www.quxionglie.com/categories/gradle/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>【转】常用IDEA快捷键</title>
-    <link href="https://www.quxionglie.com/2013/06/29/IntelliJ-IDEA-keymap/"/>
-    <id>https://www.quxionglie.com/2013/06/29/IntelliJ-IDEA-keymap/</id>
-    <published>2013-06-29T01:00:00.000Z</published>
-    <updated>2025-02-28T01:29:41.493Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;最近已经从eclipse转到IntelliJ IDEA，IDEA用起来太顺手了，许多功能正合我意。&lt;br&gt;看到时光印记写的一篇《常用IDEA快捷键》真的不错，特转一下!  &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="idea" scheme="https://www.quxionglie.com/categories/idea/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>centos6.2 64bit上安装pptp与客户端设置</title>
-    <link href="https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/"/>
-    <id>https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/</id>
-    <published>2013-04-14T02:53:00.000Z</published>
-    <updated>2025-02-28T01:29:41.493Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;主要内容&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#1.安装软件包&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#2.vi /etc/pptpd.conf 文件&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#3.vi /etc/ppp/options.pptpd&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#4.设置使用 pptpd 的用户名和密码&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#5.修改内核设置/etc/sysctl.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#6.添加 iptables 转发规则&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#7.启动pptpd 服务&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#8.一键安装shell脚本&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#9.pptp客户端连接&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#10.客户端vpn翻墙设置&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="vpn" scheme="https://www.quxionglie.com/categories/vpn/"/>
     
     
   </entry>

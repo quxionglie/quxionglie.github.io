@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.quxionglie.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Java虚拟机（JVM）提供了多种垃圾收集器（Garbage Collector, GC），每种收集器都有其独特的设计目标和权衡考量，以满足不同应用场景的需求。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM - 02 Java常见垃圾收集器">
+<meta property="og:url" content="https://www.quxionglie.com/2024/07/03/jvm02/index.html">
+<meta property="og:site_name" content="阿烈的博客">
+<meta property="og:description" content="Java虚拟机（JVM）提供了多种垃圾收集器（Garbage Collector, GC），每种收集器都有其独特的设计目标和权衡考量，以满足不同应用场景的需求。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/java_version1.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/java_version_2025.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/java_gc1.png">
+<meta property="article:published_time" content="2024-07-03T00:00:02.000Z">
+<meta property="article:modified_time" content="2025-12-14T13:29:13.272Z">
+<meta property="article:author" content="lie">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.quxionglie.com/images/2024/jvm/java_version1.png">
+
+<link rel="canonical" href="https://www.quxionglie.com/2024/07/03/jvm02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JVM - 02 Java常见垃圾收集器 | 阿烈的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?36175c8b1958d080e840f34fc69cf52d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="阿烈的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">阿烈的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code,Write,Enjoy life!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2024/07/03/jvm02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JVM - 02 Java常见垃圾收集器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-03 08:00:02" itemprop="dateCreated datePublished" datetime="2024-07-03T08:00:02+08:00">2024-07-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Java虚拟机（JVM）提供了多种垃圾收集器（Garbage Collector, GC），每种收集器都有其独特的设计目标和权衡考量，以满足不同应用场景的需求。</p>
+<span id="more"></span>
+
+<h1 id="1-Java垃圾收集器"><a href="#1-Java垃圾收集器" class="headerlink" title="1.Java垃圾收集器"></a>1.Java垃圾收集器</h1><h2 id="Serial-GC-串行收集器"><a href="#Serial-GC-串行收集器" class="headerlink" title="Serial GC (串行收集器)"></a>Serial GC (串行收集器)</h2><p>特点： 最简单、历史最悠久的收集器。它使用单个线程执行所有GC工作，并在GC期间暂停所有应用线程（Stop-The-World, STW）。<br>适用场景： 适用于客户端模式下的小型应用、嵌入式系统或单核CPU机器，这些场景内存有限（通常堆大小小于100MB），协调多线程的开销不划算。<br>启用参数： -XX:+UseSerialGC</p>
+<h1 id="Parallel-GC-并行收集器"><a href="#Parallel-GC-并行收集器" class="headerlink" title="Parallel GC (并行收集器)"></a>Parallel GC (并行收集器)</h1><p>特点： 也称吞吐量收集器（Throughput Collector）。它使用多个线程并行执行大部分的GC工作，旨在最大限度地提高应用吞吐量。但它同样会导致应用线程长时间停顿（STW）。<br>适用场景： 适用于可以容忍较长停顿的批处理系统、数据挖掘等后台服务，这些场景更关注完成总任务的时间，而非单次响应延迟。<br>默认状态： 是 JDK 5 到 JDK 8 版本的默认垃圾收集器。<br>启用参数： -XX:+UseParallelGC</p>
+<h1 id="CMS-GC-Concurrent-Mark-Sweep-并发标记清除收集器"><a href="#CMS-GC-Concurrent-Mark-Sweep-并发标记清除收集器" class="headerlink" title="CMS GC (Concurrent Mark Sweep 并发标记清除收集器)"></a>CMS GC (Concurrent Mark Sweep 并发标记清除收集器)</h1><p>特点： 追求低延迟，是第一个尝试与应用线程并发执行大部分标记工作的收集器。它在 GC 过程中只有短暂的 STW 停顿。但是，它不进行内存整理/压缩，容易产生内存碎片。<br>适用场景： 适用于响应时间敏感的网络服务、Web应用等场景。<br>状态： 在JDK 9中已被标记为废弃（Deprecated），推荐使用G1或ZGC替代。<br>启用参数： -XX:+UseConcMarkSweepGC</p>
+<h1 id="G1-GC-Garbage-First-垃圾优先收集器"><a href="#G1-GC-Garbage-First-垃圾优先收集器" class="headerlink" title="G1 GC (Garbage-First 垃圾优先收集器)"></a>G1 GC (Garbage-First 垃圾优先收集器)</h1><p>特点： G1 是 JDK 9及更高版本的默认垃圾收集器。它将堆内存划分为多个大小相等的区域（Region），并根据这些区域的垃圾数量（垃圾最多优先）来智能选择回收区域。它在实现可预测的停顿时间的同时，还能进行整理（压缩），避免内存碎片。<br>适用场景： 通用型收集器，适用于堆内存较大（通常建议大于 4GB）且需要平衡吞吐量和延迟的场景。<br>默认状态： JDK 9+ 的默认收集器。<br>启用参数： -XX:+UseG1GC</p>
+<h1 id="ZGC-Z-Garbage-Collector-Shenandoah-GC"><a href="#ZGC-Z-Garbage-Collector-Shenandoah-GC" class="headerlink" title="ZGC (Z Garbage Collector) / Shenandoah GC"></a>ZGC (Z Garbage Collector) / Shenandoah GC</h1><p>特点： 这两个是现代超低延迟收集器，目标是实现亚毫秒级（&lt;1ms）的停顿时间。它们都能在大容量堆内存（TB级别）上实现几乎恒定的停顿时间，与堆大小无关。它们通过大量的并发工作和有色指针技术实现。<br>适用场景： 适用于对延迟极其敏感的应用，如实时交易系统、大型内存数据库、需要超低停顿的游戏服务等。<br>启用参数： -XX:+UseZGC 或 -XX:+UseShenandoahGC (Shenandoah 需要特定 OpenJDK 发行版，如 Red Hat/Adoptium)。</p>
+<p>常见的Java垃圾收集器主要包括以下几种，它们的发展历程是从追求高吞吐量逐渐演变为追求低延迟：</p>
+<h1 id="2-java各版本及GC收集器份额"><a href="#2-java各版本及GC收集器份额" class="headerlink" title="2.java各版本及GC收集器份额"></a>2.java各版本及GC收集器份额</h1><h2 id="java各版本与其收集器"><a href="#java各版本与其收集器" class="headerlink" title="java各版本与其收集器"></a>java各版本与其收集器</h2><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Java_virtual_machine">Java_virtual_machine</a></p>
+<p>Java versions and their Garbage Collectors</p>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Default GC</th>
+<th>Available GCs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6u14</td>
+<td>Serial /Parallel (MP)</td>
+<td>Serial, Parallel, CMS, G1 (E)</td>
+</tr>
+<tr>
+<td>7u4–8</td>
+<td>Serial /Parallel (MP)</td>
+<td>Serial, Parallel, CMS, G1</td>
+</tr>
+<tr>
+<td>9–10</td>
+<td>G1</td>
+<td>Serial, Parallel, CMS, G1</td>
+</tr>
+<tr>
+<td>11</td>
+<td>G1</td>
+<td>Serial, Parallel, CMS, G1, Epsilon (E), ZGC (E)</td>
+</tr>
+<tr>
+<td>12–13</td>
+<td>G1</td>
+<td>Serial, Parallel, CMS, G1, Epsilon (E), ZGC (E), Shenandoah (E)</td>
+</tr>
+<tr>
+<td>14</td>
+<td>G1</td>
+<td>Serial, Parallel, G1, Epsilon (E), ZGC (E), Shenandoah (E)</td>
+</tr>
+<tr>
+<td>15–20</td>
+<td>G1</td>
+<td>Serial, Parallel, G1, Epsilon (E), ZGC, Shenandoah</td>
+</tr>
+<tr>
+<td>21–22</td>
+<td>G1</td>
+<td>Serial, Parallel, G1, Epsilon (E), ZGC, Shenandoah, GenZGC (E)</td>
+</tr>
+<tr>
+<td>23</td>
+<td>G1</td>
+<td>Serial, Parallel, G1, Epsilon (E), ZGC, Shenandoah, GenZGC (default ZGC)</td>
+</tr>
+<tr>
+<td>24</td>
+<td>G1</td>
+<td>Serial, Parallel, G1, Epsilon (E), Shenandoah, GenZGC, GenShen (E)</td>
+</tr>
+<tr>
+<td>25</td>
+<td>G1</td>
+<td>Serial, Parallel, G1, Epsilon (E), Shenandoah, GenZGC, GenShen</td>
+</tr>
+<tr>
+<td>(E) = experimental</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="份额对比"><a href="#份额对比" class="headerlink" title="份额对比"></a>份额对比</h2><p>来源：<a target="_blank" rel="noopener" href="https://newrelic.com/resources/report/2024-state-of-the-java-ecosystem">2024 State of the Java Ecosystem</a></p>
+<h3 id="java长期支持版本采用情况-2024年"><a href="#java长期支持版本采用情况-2024年" class="headerlink" title="java长期支持版本采用情况(2024年)"></a>java长期支持版本采用情况(2024年)</h3><p><img src="/images/2024/jvm/java_version1.png" alt="Alt text"></p>
+<p>java8使用份额在逐年减少。</p>
+<h3 id="java生产版本采用情况-2025年"><a href="#java生产版本采用情况-2025年" class="headerlink" title="java生产版本采用情况(2025年)"></a>java生产版本采用情况(2025年)</h3><p>在<a target="_blank" rel="noopener" href="https://www.qbssoftware.com/wp-content/uploads/2025/04/Azul-report-State-of-Java-2025.pdf">Azul-report-State-of-Java-2025</a>报吿中的份额如下<br><img src="/images/2024/jvm/java_version_2025.png" alt="Alt text"></p>
+<p>java21(LTS) 的份额在逐年增加。</p>
+<h3 id="LTS版本java的GC收集器采用情况"><a href="#LTS版本java的GC收集器采用情况" class="headerlink" title="LTS版本java的GC收集器采用情况"></a>LTS版本java的GC收集器采用情况</h3><p><img src="/images/2024/jvm/java_gc1.png" alt="Alt text"></p>
+<p>java7/java8版本,CMS、G1与Parallel份额差不多，都在20%左右。<br>java11以后，默认都是使用G1算法，但Serial也有其使用场景。</p>
+<h1 id="3-参考资料"><a href="#3-参考资料" class="headerlink" title="3.参考资料"></a>3.参考资料</h1><p><a target="_blank" rel="noopener" href="https://newrelic.com/resources/report/2024-state-of-the-java-ecosystem">2024 State of the Java Ecosystem</a><br><a target="_blank" rel="noopener" href="https://www.qbssoftware.com/wp-content/uploads/2025/04/Azul-report-State-of-Java-2025.pdf">Azul-report-State-of-Java-2025</a><br><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/javase/17/gctuning/introduction-garbage-collection-tuning.html">HotSpot Virtual Machine Garbage Collection Tuning Guide</a><br><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/10513">杨晓峰 - Java常见的垃圾收集器有哪些？</a></p>
+<p>– end – </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/06/30/jvm01/" rel="prev" title="JVM - 01 为什么有垃圾回收">
+      <i class="fa fa-chevron-left"></i> JVM - 01 为什么有垃圾回收
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/04/jvm03/" rel="next" title="JVM - 03 java如何进行垃圾回收">
+      JVM - 03 java如何进行垃圾回收 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Java%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">1.Java垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Serial-GC-%E4%B8%B2%E8%A1%8C%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">Serial GC (串行收集器)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Parallel-GC-%E5%B9%B6%E8%A1%8C%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">Parallel GC (并行收集器)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CMS-GC-Concurrent-Mark-Sweep-%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">CMS GC (Concurrent Mark Sweep 并发标记清除收集器)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#G1-GC-Garbage-First-%E5%9E%83%E5%9C%BE%E4%BC%98%E5%85%88%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">G1 GC (Garbage-First 垃圾优先收集器)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ZGC-Z-Garbage-Collector-Shenandoah-GC"><span class="nav-number">5.</span> <span class="nav-text">ZGC (Z Garbage Collector) &#x2F; Shenandoah GC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-java%E5%90%84%E7%89%88%E6%9C%AC%E5%8F%8AGC%E6%94%B6%E9%9B%86%E5%99%A8%E4%BB%BD%E9%A2%9D"><span class="nav-number">6.</span> <span class="nav-text">2.java各版本及GC收集器份额</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E5%90%84%E7%89%88%E6%9C%AC%E4%B8%8E%E5%85%B6%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">6.1.</span> <span class="nav-text">java各版本与其收集器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BD%E9%A2%9D%E5%AF%B9%E6%AF%94"><span class="nav-number">6.2.</span> <span class="nav-text">份额对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E9%95%BF%E6%9C%9F%E6%94%AF%E6%8C%81%E7%89%88%E6%9C%AC%E9%87%87%E7%94%A8%E6%83%85%E5%86%B5-2024%E5%B9%B4"><span class="nav-number">6.2.1.</span> <span class="nav-text">java长期支持版本采用情况(2024年)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E7%94%9F%E4%BA%A7%E7%89%88%E6%9C%AC%E9%87%87%E7%94%A8%E6%83%85%E5%86%B5-2025%E5%B9%B4"><span class="nav-number">6.2.2.</span> <span class="nav-text">java生产版本采用情况(2025年)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LTS%E7%89%88%E6%9C%ACjava%E7%9A%84GC%E6%94%B6%E9%9B%86%E5%99%A8%E9%87%87%E7%94%A8%E6%83%85%E5%86%B5"><span class="nav-number">6.2.3.</span> <span class="nav-text">LTS版本java的GC收集器采用情况</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">3.参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lie"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">lie</p>
+  <div class="site-description" itemprop="description">Yesterday You Said Tomorrow</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2012 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿烈</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'cab274acde8887facde4',
+      clientSecret: 'e6816fb20c02f5a6d9d50bc1228a5c738f87d350',
+      repo        : 'quxionglie.github.io',
+      owner       : 'quxionglie',
+      admin       : ['quxionglie'],
+      id          : '36f2dd4ff9f4339118e1382997f48803',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
