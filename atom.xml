@@ -54,11 +54,28 @@
   </entry>
   
   <entry>
+    <title>JVM - 05 java垃圾收集器：CMS收集器</title>
+    <link href="https://www.quxionglie.com/2024/07/06/jvm05-cms/"/>
+    <id>https://www.quxionglie.com/2024/07/06/jvm05-cms/</id>
+    <published>2024-07-06T12:00:00.000Z</published>
+    <updated>2025-12-15T15:25:41.243Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;CMS收集器(Concurrent Mark Sweep)收集器是一种以获取最短回收停顿时间为目标的收集器。可以保证大部分工作都并发进行(应用不停止)，垃圾回收只暂停很少的时间，此收集器适合对响应时间要求比较高的中、大规模应用。如：互联网站或B/S系统的服务端，这类应用尤其重视服务的响应速度，希望系统停顿时间最短，以给用户带来较好的体验。CMS收集器非常符合这类应用的需求。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="jvm" scheme="https://www.quxionglie.com/categories/jvm/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>JVM - 04 java垃圾收集器：串行/并行收集器</title>
     <link href="https://www.quxionglie.com/2024/07/05/jvm04/"/>
     <id>https://www.quxionglie.com/2024/07/05/jvm04/</id>
     <published>2024-07-05T12:00:00.000Z</published>
-    <updated>2025-12-14T13:56:24.603Z</updated>
+    <updated>2025-12-15T15:29:10.341Z</updated>
     
     
     <summary type="html">&lt;p&gt;串行收集器使用单线程来执行所有的垃圾收集工作。&lt;br&gt;并行收集器（也称吞吐量收集器，Throughput Collector）使用多线程并行执行垃圾收集操作。&lt;/p&gt;</summary>
@@ -355,29 +372,6 @@
     
     
     <category term="linux" scheme="https://www.quxionglie.com/categories/linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>电子圈：如何构建一个用户激励及悬赏模式</title>
-    <link href="https://www.quxionglie.com/2014/04/10/how-to-build-a-user-incentive-and-reward-model/"/>
-    <id>https://www.quxionglie.com/2014/04/10/how-to-build-a-user-incentive-and-reward-model/</id>
-    <published>2014-04-10T12:21:43.000Z</published>
-    <updated>2025-12-10T12:53:25.706Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;电子圈是一个社交平台，但是目前电子圈用户的行为并不能沉淀为内容，导致产品没有持续性;圈内的问答质量不高、活动较少，导致参与的人数不多、范围不广。分享只能活跃气氛，如果电子圈没有直指人心的功能，用户也很快会流失。&lt;/p&gt;
-&lt;p&gt;如果想用户激励及悬赏模式有不错的效果,需要清楚两件事：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;电子圈核心功能是什么?&lt;/li&gt;
-&lt;li&gt;电子圈种子用户在哪里?&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;2025年备注：&lt;br&gt;电子圈是专门为电子行业从业人员开发的社交网站，是电子行业最大的真实社交网站，不仅可以在里面参加行业里各种聚会、研讨会及展览会，结识同行，相互认识交流，拓展行业人脉，还可以向行业的专家提问得到他们的帮助及解答。&lt;br&gt;本文我写于2014年，仅在内部讨论。在博客上发表是在2025年。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
     
     
   </entry>

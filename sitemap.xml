@@ -2,16 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.quxionglie.com/2024/07/04/jvm03/</loc>
+    <loc>https://www.quxionglie.com/2024/07/05/jvm04/</loc>
     
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2024/07/05/jvm04/</loc>
+    <loc>https://www.quxionglie.com/2024/07/06/jvm05-cms/</loc>
+    
+    <lastmod>2025-12-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2024/07/04/jvm03/</loc>
     
     <lastmod>2025-12-14</lastmod>
     
@@ -146,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
+    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -155,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
+    <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -290,15 +299,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2013/02/18/install-lua-in-mac-os/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -317,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/23/managing-hierarchical-data-in-oracle-1/</loc>
+    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -326,7 +326,16 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
+    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2012/03/23/managing-hierarchical-data-in-oracle-1/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -344,7 +353,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
+    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -382,7 +391,7 @@
 
   <url>
     <loc>https://www.quxionglie.com/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -392,119 +401,119 @@
   
   <url>
     <loc>https://www.quxionglie.com/categories/jvm/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/oralce/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/dev/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/plan/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/mac/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/spring/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/linux/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/java/</loc>
-    <lastmod>2025-12-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/categories/gradle/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/lua/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/android/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/categories/gradle/</loc>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/vpn/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/idea/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/fabric/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2025-12-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/categories/%E9%9A%8F%E7%AC%94/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.quxionglie.com/categories/hexo/</loc>
-    <lastmod>2025-12-14</lastmod>
+    <lastmod>2025-12-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <lastmod>2025-12-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

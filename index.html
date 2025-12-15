@@ -305,6 +305,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2024/07/06/jvm05-cms/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/07/06/jvm05-cms/" class="post-title-link" itemprop="url">JVM - 05 java垃圾收集器：CMS收集器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-06 20:00:00" itemprop="dateCreated datePublished" datetime="2024-07-06T20:00:00+08:00">2024-07-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>CMS收集器(Concurrent Mark Sweep)收集器是一种以获取最短回收停顿时间为目标的收集器。可以保证大部分工作都并发进行(应用不停止)，垃圾回收只暂停很少的时间，此收集器适合对响应时间要求比较高的中、大规模应用。如：互联网站或B/S系统的服务端，这类应用尤其重视服务的响应速度，希望系统停顿时间最短，以给用户带来较好的体验。CMS收集器非常符合这类应用的需求。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/07/06/jvm05-cms/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2024/07/05/jvm04/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -797,72 +871,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2018/01/08/2017-team-annual-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="lie">
-      <meta itemprop="description" content="Yesterday You Said Tomorrow">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿烈的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/08/2017-team-annual-summary/" class="post-title-link" itemprop="url">公司金融开发组2017年度总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-08 10:29:29" itemprop="dateCreated datePublished" datetime="2018-01-08T10:29:29+08:00">2018-01-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文主要回顾了2017年项目组的工作概况、成员构成以及当时采用的项目开发流程、经验教训和2018年改进建议。</p>
-<p>我在2018年1月时写了此文档，并在整个分公司技术部内(不仅是组内)进行了阐述和讨论。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/01/08/2017-team-annual-summary/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -934,7 +942,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
