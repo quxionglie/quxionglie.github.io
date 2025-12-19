@@ -54,6 +54,26 @@
   </entry>
   
   <entry>
+    <title>JVM - 06 java垃圾收集器：选择收集器</title>
+    <link href="https://www.quxionglie.com/2024/08/04/jvm07-choose-gc/"/>
+    <id>https://www.quxionglie.com/2024/08/04/jvm07-choose-gc/</id>
+    <published>2024-08-04T12:00:00.000Z</published>
+    <updated>2025-12-19T09:05:25.213Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;1-选择GC收集器&quot;&gt;&lt;a href=&quot;#1-选择GC收集器&quot; class=&quot;headerlink&quot; title=&quot;1 选择GC收集器&quot;&gt;&lt;/a&gt;1 选择GC收集器&lt;/h1&gt;&lt;p&gt;串行收集器：&lt;br&gt;–适用情况：数据量比较小（100M左右）；单处理器下并且对响应时</summary>
+      
+    
+    
+    
+    <category term="jvm" scheme="https://www.quxionglie.com/categories/jvm/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>JVM - 06 java垃圾收集器：java G1收集器</title>
     <link href="https://www.quxionglie.com/2024/07/14/jvm06-g1/"/>
     <id>https://www.quxionglie.com/2024/07/14/jvm06-g1/</id>
@@ -347,25 +367,6 @@
     
     <summary type="html">&lt;p&gt;主要内容&lt;/p&gt;
 &lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#1.定义主机列表&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##1.1 主机&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##1.2 角色&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#2.如何构建主机列表(host lists) ?&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##2.1 四种主机定义方式&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;###(1)Globally, via env&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;###(2)Globally, via the command line&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;###(3)Per-task, via the command line&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;###(4)Per-task, via decorators&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##2.2 主机定义的优先顺序&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##2.3 测试&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#3. 其它&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##3.1 合并主机列表&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##3.2 重复的主机&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##3.3 不包含指定的主机&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##3.4 使用execute智能执行task&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="fabric" scheme="https://www.quxionglie.com/categories/fabric/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Fabric-01 安装与使用</title>
-    <link href="https://www.quxionglie.com/2014/08/11/learning-fabric-1-overview-and-tutorial/"/>
-    <id>https://www.quxionglie.com/2014/08/11/learning-fabric-1-overview-and-tutorial/</id>
-    <published>2014-08-11T06:56:00.000Z</published>
-    <updated>2025-02-28T01:29:41.494Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;#1.Fabric是什么？&lt;/p&gt;
-&lt;p&gt;Fabric is a Python (2.5-2.7) library and command-line tool for streamlining the use of SSH for application deployment or systems administration tasks.&lt;/p&gt;
-&lt;p&gt;Fabric是一个Python(2.5-2.7)库，可以通过SSH在多个主机上批量执行任务。Fabric非常适合于应用的(自动化)部署或者执行系统管理任务。&lt;/p&gt;</summary>
     
     
     
