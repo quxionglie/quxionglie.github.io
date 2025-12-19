@@ -58,13 +58,10 @@
     <link href="https://www.quxionglie.com/2024/08/04/jvm07-choose-gc/"/>
     <id>https://www.quxionglie.com/2024/08/04/jvm07-choose-gc/</id>
     <published>2024-08-04T12:00:00.000Z</published>
-    <updated>2025-12-19T09:10:57.843Z</updated>
+    <updated>2025-12-19T09:12:23.428Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;h1 id=&quot;1-选择GC收集器&quot;&gt;&lt;a href=&quot;#1-选择GC收集器&quot; class=&quot;headerlink&quot; title=&quot;1 选择GC收集器&quot;&gt;&lt;/a&gt;1 选择GC收集器&lt;/h1&gt;&lt;p&gt;串行收集器：&lt;br&gt;–适用情况：数据量比较小（100M左右）；单处理器下并且对响应时</summary>
-      
+    <summary type="html">&lt;p&gt;选择主要取决于你的应用对 “延迟（Latency）” 与 “吞吐量（Throughput）” 的权衡偏好&lt;/p&gt;</summary>
     
     
     
