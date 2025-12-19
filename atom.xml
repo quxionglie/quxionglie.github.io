@@ -54,11 +54,11 @@
   </entry>
   
   <entry>
-    <title>JVM - 06 java垃圾收集器：选择收集器</title>
+    <title>JVM - 07 java垃圾收集器：选择收集器</title>
     <link href="https://www.quxionglie.com/2024/08/04/jvm07-choose-gc/"/>
     <id>https://www.quxionglie.com/2024/08/04/jvm07-choose-gc/</id>
     <published>2024-08-04T12:00:00.000Z</published>
-    <updated>2025-12-19T09:12:23.428Z</updated>
+    <updated>2025-12-19T09:13:34.260Z</updated>
     
     
     <summary type="html">&lt;p&gt;选择主要取决于你的应用对 “延迟（Latency）” 与 “吞吐量（Throughput）” 的权衡偏好&lt;/p&gt;</summary>
