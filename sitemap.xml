@@ -200,7 +200,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/04/09/what-skills-do-developer-have/</loc>
+    <loc>https://www.quxionglie.com/2015/03/31/from-octopress-to-jekyll/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -209,7 +209,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/03/31/from-octopress-to-jekyll/</loc>
+    <loc>https://www.quxionglie.com/2015/04/09/what-skills-do-developer-have/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -308,7 +308,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
+    <loc>https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -317,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/</loc>
+    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -353,15 +353,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -371,7 +362,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/25/managing-hierarchical-data-in-oracle-3/</loc>
+    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -389,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/01/03/start-here-2013/</loc>
+    <loc>https://www.quxionglie.com/2012/03/25/managing-hierarchical-data-in-oracle-3/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -399,6 +390,15 @@
   
   <url>
     <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2013/01/03/start-here-2013/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -419,6 +419,13 @@
   
   <url>
     <loc>https://www.quxionglie.com/categories/oralce/</loc>
+    <lastmod>2025-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/categories/dev/</loc>
     <lastmod>2025-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -446,13 +453,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/dev/</loc>
-    <lastmod>2025-12-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/categories/linux/</loc>
     <lastmod>2025-12-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -460,14 +460,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/gradle/</loc>
+    <loc>https://www.quxionglie.com/categories/java/</loc>
     <lastmod>2025-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/java/</loc>
+    <loc>https://www.quxionglie.com/categories/gradle/</loc>
     <lastmod>2025-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
