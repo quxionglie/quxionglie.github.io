@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.quxionglie.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="G1（Garbage-First）是 Java 虚拟机（JVM）中一款面向服务端应用的垃圾收集器，旨在为大内存机器提供高吞吐量且停顿时间可预测的内存回收能力。 jdk9及以后垃圾优先垃圾回收器是默认的垃圾回收器，因此通常无需执行任何额外操作。您可以通过 -XX:+UseG1GC命令行显式启用它。 G1 计划作为并发标记清除收集器 (CMS) 的长期替代方案。与 CMS 相比，G1 的一些差异使其成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM - 06 java垃圾收集器：java G1收集器">
+<meta property="og:url" content="https://www.quxionglie.com/2024/07/14/jvm06-g1/index.html">
+<meta property="og:site_name" content="阿烈的博客">
+<meta property="og:description" content="G1（Garbage-First）是 Java 虚拟机（JVM）中一款面向服务端应用的垃圾收集器，旨在为大内存机器提供高吞吐量且停顿时间可预测的内存回收能力。 jdk9及以后垃圾优先垃圾回收器是默认的垃圾回收器，因此通常无需执行任何额外操作。您可以通过 -XX:+UseG1GC命令行显式启用它。 G1 计划作为并发标记清除收集器 (CMS) 的长期替代方案。与 CMS 相比，G1 的一些差异使其成">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm11_02.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm11_03.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm_g1_01.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm_g1_02.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm_g1_03.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm_g1_04.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm_g1_05.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm_g1_06.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm_g1_07.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm_g1_08.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm_g1_09.png">
+<meta property="og:image" content="https://www.quxionglie.com/images/2024/jvm/jvm_g1_10.png">
+<meta property="article:published_time" content="2024-07-14T12:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-19T04:59:13.400Z">
+<meta property="article:author" content="lie">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.quxionglie.com/images/2024/jvm/jvm11_02.png">
+
+<link rel="canonical" href="https://www.quxionglie.com/2024/07/14/jvm06-g1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JVM - 06 java垃圾收集器：java G1收集器 | 阿烈的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?36175c8b1958d080e840f34fc69cf52d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="阿烈的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">阿烈的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Code,Write,Enjoy life!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2024/07/14/jvm06-g1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JVM - 06 java垃圾收集器：java G1收集器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-14 20:00:00" itemprop="dateCreated datePublished" datetime="2024-07-14T20:00:00+08:00">2024-07-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>G1（Garbage-First）是 Java 虚拟机（JVM）中一款面向服务端应用的垃圾收集器，旨在为大内存机器提供高吞吐量且停顿时间可预测的内存回收能力。</p>
+<p>jdk9及以后垃圾优先垃圾回收器是默认的垃圾回收器，因此通常无需执行任何额外操作。您可以通过 -XX:+UseG1GC命令行显式启用它。</p>
+<p>G1 计划作为并发标记清除收集器 (CMS) 的长期替代方案。与 CMS 相比，G1 的一些差异使其成为更优的解决方案。其中一个区别在于 G1 是一种压缩式收集器。G1 的压缩程度足以完全避免使用细粒度的空闲列表进行内存分配，而是依赖于区域。这大大简化了收集器的部分功能，并基本消除了潜在的碎片问题。此外，与 CMS 收集器相比，G1 提供了更可预测的垃圾回收暂停时间，并允许用户指定所需的暂停目标。</p>
+<span id="more"></span>
+
+<h1 id="核心设计理念：基于-Region-的内存划分"><a href="#核心设计理念：基于-Region-的内存划分" class="headerlink" title="核心设计理念：基于 Region 的内存划分"></a>核心设计理念：基于 Region 的内存划分</h1><p>与传统垃圾收集器（如 CMS）将堆空间划分为连续的年轻代和老年代不同，G1 将整个 Java 堆划分为约 2048 个大小相等且独立的 Region（区域）。</p>
+<p>角色动态分配：每个 Region 可以根据需要扮演 Eden、Survivor、Old 或 Humongous（存储巨型对象）的角色。</p>
+<p>非连续性：逻辑上的新生代和老年代由一系列不连续的 Region 组成，这种设计极大地提高了内存分配和回收的灵活性。</p>
+<p>较老的垃圾回收器（串行、并行、CMS）都将堆分为三个部分：新生代、老年代和具有固定内存大小的永久代。<br><img src="/images/2024/jvm/jvm11_02.png" alt="Alt text"></p>
+<p>G1采用不同的方法：<br><img src="/images/2024/jvm/jvm11_03.png" alt="Alt text"></p>
+<p>region 的大小是一致的，数值是在 1M 到 32M 字节之间的一个 2 的幂值数，JVM 会尽量划分 2048 个左右、同等大小的 region。当然这个数字既可以手动调整，G1 也会根据堆大小自动进行调整。</p>
+<p>在 G1 实现中，年代是个逻辑概念，具体体现在，一部分 region 是作为 Eden，一部分作为 Survivor，除了意料之中的 Old region，G1 会将超过 region 50% 大小的对象（在应用中，通常是 byte 或 char 数组）归类为 Humongous 对象，并放置在相应的 region 中。逻辑上，Humongous region 算是老年代的一部分，因为复制这样的大对象是很昂贵的操作，并不适合新生代 GC 的复制算法。</p>
+<h1 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h1><p>G1 的名字源于其核心策略：优先回收垃圾最多的区域（Garbage First）。它主要有以下三种回收模式：</p>
+<ul>
+<li>Young GC（新生代回收）：当 Eden 区满时触发，将存活对象从 Eden 和 Survivor 移动到新的 Survivor 或老年代 Region 中。</li>
+<li>Mixed GC（混合回收）：在老年代占用率达到阈值（默认 45%）时触发。它不仅回收所有的新生代，还会回收一部分老年代 Region。</li>
+<li>Full GC：如果内存分配速度远快于回收速度，G1 会退化为 Full GC，这通常是单线程或并发性较低的回收，应尽量通过调优避免。</li>
+</ul>
+<h1 id="工作流程（并发标记周期）"><a href="#工作流程（并发标记周期）" class="headerlink" title="工作流程（并发标记周期）"></a>工作流程（并发标记周期）</h1><p>为了实现短时间的停顿，G1 在回收老年代时采用了复杂的并发标记过程：</p>
+<ul>
+<li>初始标记 (Initial Mark)：标记 GC Roots 直接关联的对象（需 STW 停顿，通常伴随 Young GC 进行）。</li>
+<li>并发标记 (Concurrent Marking)：从 GC Roots 开始对堆中对象进行可达性分析，此过程与应用线程并发运行。</li>
+<li>最终标记 (Remark)：处理并发标记期间遗留的少量变动对象（需 STW 停顿）。</li>
+<li>筛选回收 (Cleanup/Evacuation)：根据各 Region 的回收价值和成本排序，根据用户设定的期望停顿时间制定回收计划，并将存活对象复制到空 Region 中（需 STW 停顿）。</li>
+</ul>
+<h1 id="关键技术支撑"><a href="#关键技术支撑" class="headerlink" title="关键技术支撑"></a>关键技术支撑</h1><p>记忆集 (Remembered Sets, RSet)：每个 Region 维护一个 RSet，记录“谁引用了我”，从而实现独立回收某个 Region 而无需扫描整个堆。<br>可预测的停顿时间：用户可以通过参数 -XX:MaxGCPauseMillis 设置期望的最大 GC 停顿时间（默认 200ms），G1 会尽力在这个时间内完成回收工作。</p>
+<h1 id="G1分步指南"><a href="#G1分步指南" class="headerlink" title="G1分步指南"></a>G1分步指南</h1><h2 id="1-G1堆结构"><a href="#1-G1堆结构" class="headerlink" title="(1) G1堆结构"></a>(1) G1堆结构</h2><p>堆是将一块内存区域分割成许多固定大小的区域。<br><img src="/images/2024/jvm/jvm_g1_01.png" alt="Alt text"></p>
+<p>区域大小由 JVM 在启动时选择。JVM 通常目标区域大小约为 2000 个，大小从 1MB 到 32MB 不等。</p>
+<h2 id="2-G1堆分配"><a href="#2-G1堆分配" class="headerlink" title="(2) G1堆分配"></a>(2) G1堆分配</h2><p>实际上，这些区域被映射到Eden、Survivor和老年代 Region空间的逻辑表示中。<br><img src="/images/2024/jvm/jvm_g1_02.png" alt="Alt text"></p>
+<h2 id="3-G1-的年轻一代"><a href="#3-G1-的年轻一代" class="headerlink" title="(3) G1 的年轻一代"></a>(3) G1 的年轻一代</h2><p>堆内存被划分成大约 2000 个区域。最小大小为 1MB，最大大小为 32MB。蓝色区域存放老年代对象，绿色区域存放新生代对象。<br><img src="/images/2024/jvm/jvm_g1_03.png" alt="Alt text"></p>
+<p>请注意，这些区域不需要像以前的垃圾收集器那样是连续的。</p>
+<h2 id="4-G1-Young-GC"><a href="#4-G1-Young-GC" class="headerlink" title="(4) G1 Young GC"></a>(4) G1 Young GC</h2><p>存活对象会被迁移（即复制或移动）到一个或多个存活区。如果达到老化阈值，部分对象会被提升到老年代区。<br><img src="/images/2024/jvm/jvm_g1_04.png" alt="Alt text"></p>
+<h2 id="5-G1-Young-GC-结束"><a href="#5-G1-Young-GC-结束" class="headerlink" title="(5) G1 Young GC 结束"></a>(5) G1 Young GC 结束</h2><p>存活对象已被疏散到Survivor区域或老年代区域。<br><img src="/images/2024/jvm/jvm_g1_05.png" alt="Alt text"></p>
+<h2 id="6-初始标记阶段-Initial-Marking-Phase"><a href="#6-初始标记阶段-Initial-Marking-Phase" class="headerlink" title="(6) 初始标记阶段 (Initial Marking Phase)"></a>(6) 初始标记阶段 (Initial Marking Phase)</h2><p>对存活对象的初始标记是借助新生代垃圾回收实现的。在日志中，这会被记录为GC pause (young)(inital-mark)。<br><img src="/images/2024/jvm/jvm_g1_06.png" alt="Alt text"></p>
+<h2 id="7-同步标记阶段-Concurrent-Marking-Phase"><a href="#7-同步标记阶段-Concurrent-Marking-Phase" class="headerlink" title="(7) 同步标记阶段 (Concurrent Marking Phase)"></a>(7) 同步标记阶段 (Concurrent Marking Phase)</h2><p>如果在备注阶段发现空区域（以“X”标记），则立即将其移除。此外，还会计算用于判断存活状态的“统计”信息。<br><img src="/images/2024/jvm/jvm_g1_07.png" alt="Alt text"></p>
+<h2 id="8-备注阶段-Remark-Phase"><a href="#8-备注阶段-Remark-Phase" class="headerlink" title="(8) 备注阶段 (Remark Phase)"></a>(8) 备注阶段 (Remark Phase)</h2><p>空区域已被移除并回收。现在将计算所有区域的活跃度。<br><img src="/images/2024/jvm/jvm_g1_08.png" alt="Alt text"></p>
+<h2 id="9-复制-清理阶段-Copying-Cleanup-Phase"><a href="#9-复制-清理阶段-Copying-Cleanup-Phase" class="headerlink" title="(9) 复制/清理阶段 (Copying/Cleanup Phase)"></a>(9) 复制/清理阶段 (Copying/Cleanup Phase)</h2><p>G1 选择“存活率”最低的区域，也就是那些可以最快收集的区域。然后，这些区域会与新生代垃圾回收同时进行收集。这在日志中会以 表示[GC pause (mixed)]。因此，新生代和老代垃圾回收同时进行。<br><img src="/images/2024/jvm/jvm_g1_09.png" alt="Alt text"></p>
+<h2 id="10-复制-清理阶段之后"><a href="#10-复制-清理阶段之后" class="headerlink" title="(10) 复制/清理阶段之后"></a>(10) 复制/清理阶段之后</h2><p>选定的区域已被收集并压缩成图中所示的深蓝色区域和深绿色区域。<br><img src="/images/2024/jvm/jvm_g1_10.png" alt="Alt text"></p>
+<h1 id="G1收集器参数"><a href="#G1收集器参数" class="headerlink" title="G1收集器参数"></a>G1收集器参数</h1><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-XX:+UseG1GC</td>
+<td>使用 G1 (Garbage First) 垃圾收集器</td>
+</tr>
+<tr>
+<td>-XX:MaxGCPauseMillis=n</td>
+<td>设置最大GC停顿时间(GC pause time)指标(target). 这是一个软性指标(soft goal), JVM 会尽量去达成这个目标.</td>
+</tr>
+<tr>
+<td>-XX:InitiatingHeapOccupancyPercent=n</td>
+<td>启动并发GC周期时的堆内存占用百分比. G1收集器用它来触发并发GC周期,基于整个堆的使用率, 默认值为 45.</td>
+</tr>
+<tr>
+<td>-XX:NewRatio=n</td>
+<td>新生代与老生代(new/old generation)的大小比例，默认值为 2.</td>
+</tr>
+<tr>
+<td>-XX:SurvivorRatio=n</td>
+<td>eden/survivor 空间大小的比例(Ratio). 默认值为 8.</td>
+</tr>
+<tr>
+<td>-XX:MaxTenuringThreshold=n</td>
+<td>提升年老代的最大临界值(tenuring threshold). 默认值为 15.</td>
+</tr>
+<tr>
+<td>-XX:ParallelGCThreads=n</td>
+<td>设置垃圾收集器在并行阶段使用的线程数,默认值随JVM运行的平台不同而不同.</td>
+</tr>
+<tr>
+<td>-XX:ConcGCThreads=n</td>
+<td>并发垃圾收集器使用的线程数量. 默认值随JVM运行的平台不同而不同.</td>
+</tr>
+<tr>
+<td>-XX:G1ReservePercent=n</td>
+<td>设置堆内存保留为假天花板的总量,以降低提升失败的可能性. 默认值是 10.</td>
+</tr>
+<tr>
+<td>-XX:G1HeapRegionSize=n</td>
+<td>使用G1时Java堆会被分为大小统一的的区(region)。此参数可以指定每个heap区的大小. 默认值将根据 heap size 算出最优解. 最小值为 1Mb, 最大值为 32Mb.</td>
+</tr>
+</tbody></table>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html">Getting Started with the G1 Garbage Collector</a><br><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/javase/14/gctuning/garbage-first-g1-garbage-collector1.html">Garbage-First (G1) Garbage Collector</a><br><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/703481">康杨 垃圾回收器：为什么G1被叫做GC中的王者？</a><br>– end – </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/06/jvm05-cms/" rel="prev" title="JVM - 05 java垃圾收集器：CMS收集器">
+      <i class="fa fa-chevron-left"></i> JVM - 05 java垃圾收集器：CMS收集器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/08/21/game-prize-money-and-points-calculation/" rel="next" title="浅谈比赛奖金分配与对战积分计算">
+      浅谈比赛奖金分配与对战积分计算 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5%EF%BC%9A%E5%9F%BA%E4%BA%8E-Region-%E7%9A%84%E5%86%85%E5%AD%98%E5%88%92%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">核心设计理念：基于 Region 的内存划分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">垃圾回收机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%88%E5%B9%B6%E5%8F%91%E6%A0%87%E8%AE%B0%E5%91%A8%E6%9C%9F%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">工作流程（并发标记周期）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E6%94%AF%E6%92%91"><span class="nav-number">4.</span> <span class="nav-text">关键技术支撑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#G1%E5%88%86%E6%AD%A5%E6%8C%87%E5%8D%97"><span class="nav-number">5.</span> <span class="nav-text">G1分步指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-G1%E5%A0%86%E7%BB%93%E6%9E%84"><span class="nav-number">5.1.</span> <span class="nav-text">(1) G1堆结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-G1%E5%A0%86%E5%88%86%E9%85%8D"><span class="nav-number">5.2.</span> <span class="nav-text">(2) G1堆分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-G1-%E7%9A%84%E5%B9%B4%E8%BD%BB%E4%B8%80%E4%BB%A3"><span class="nav-number">5.3.</span> <span class="nav-text">(3) G1 的年轻一代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-G1-Young-GC"><span class="nav-number">5.4.</span> <span class="nav-text">(4) G1 Young GC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-G1-Young-GC-%E7%BB%93%E6%9D%9F"><span class="nav-number">5.5.</span> <span class="nav-text">(5) G1 Young GC 结束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%88%9D%E5%A7%8B%E6%A0%87%E8%AE%B0%E9%98%B6%E6%AE%B5-Initial-Marking-Phase"><span class="nav-number">5.6.</span> <span class="nav-text">(6) 初始标记阶段 (Initial Marking Phase)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%90%8C%E6%AD%A5%E6%A0%87%E8%AE%B0%E9%98%B6%E6%AE%B5-Concurrent-Marking-Phase"><span class="nav-number">5.7.</span> <span class="nav-text">(7) 同步标记阶段 (Concurrent Marking Phase)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%A4%87%E6%B3%A8%E9%98%B6%E6%AE%B5-Remark-Phase"><span class="nav-number">5.8.</span> <span class="nav-text">(8) 备注阶段 (Remark Phase)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%A4%8D%E5%88%B6-%E6%B8%85%E7%90%86%E9%98%B6%E6%AE%B5-Copying-Cleanup-Phase"><span class="nav-number">5.9.</span> <span class="nav-text">(9) 复制&#x2F;清理阶段 (Copying&#x2F;Cleanup Phase)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E5%A4%8D%E5%88%B6-%E6%B8%85%E7%90%86%E9%98%B6%E6%AE%B5%E4%B9%8B%E5%90%8E"><span class="nav-number">5.10.</span> <span class="nav-text">(10) 复制&#x2F;清理阶段之后</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#G1%E6%94%B6%E9%9B%86%E5%99%A8%E5%8F%82%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">G1收集器参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lie"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">lie</p>
+  <div class="site-description" itemprop="description">Yesterday You Said Tomorrow</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2012 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿烈</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'cab274acde8887facde4',
+      clientSecret: 'e6816fb20c02f5a6d9d50bc1228a5c738f87d350',
+      repo        : 'quxionglie.github.io',
+      owner       : 'quxionglie',
+      admin       : ['quxionglie'],
+      id          : '16c98cf05cb2d31439be78bee7b30af5',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

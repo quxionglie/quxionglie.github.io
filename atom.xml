@@ -54,6 +54,25 @@
   </entry>
   
   <entry>
+    <title>JVM - 06 java垃圾收集器：java G1收集器</title>
+    <link href="https://www.quxionglie.com/2024/07/14/jvm06-g1/"/>
+    <id>https://www.quxionglie.com/2024/07/14/jvm06-g1/</id>
+    <published>2024-07-14T12:00:00.000Z</published>
+    <updated>2025-12-19T04:59:13.400Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;G1（Garbage-First）是 Java 虚拟机（JVM）中一款面向服务端应用的垃圾收集器，旨在为大内存机器提供高吞吐量且停顿时间可预测的内存回收能力。&lt;/p&gt;
+&lt;p&gt;jdk9及以后垃圾优先垃圾回收器是默认的垃圾回收器，因此通常无需执行任何额外操作。您可以通过 -XX:+UseG1GC命令行显式启用它。&lt;/p&gt;
+&lt;p&gt;G1 计划作为并发标记清除收集器 (CMS) 的长期替代方案。与 CMS 相比，G1 的一些差异使其成为更优的解决方案。其中一个区别在于 G1 是一种压缩式收集器。G1 的压缩程度足以完全避免使用细粒度的空闲列表进行内存分配，而是依赖于区域。这大大简化了收集器的部分功能，并基本消除了潜在的碎片问题。此外，与 CMS 收集器相比，G1 提供了更可预测的垃圾回收暂停时间，并允许用户指定所需的暂停目标。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="jvm" scheme="https://www.quxionglie.com/categories/jvm/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>JVM - 05 java垃圾收集器：CMS收集器</title>
     <link href="https://www.quxionglie.com/2024/07/06/jvm05-cms/"/>
     <id>https://www.quxionglie.com/2024/07/06/jvm05-cms/</id>
@@ -351,27 +370,6 @@
     
     
     <category term="fabric" scheme="https://www.quxionglie.com/categories/fabric/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>linux系列4 - pxe+dhcp+nfs+kickstart无人值守批量安装Centos6.x x64</title>
-    <link href="https://www.quxionglie.com/2014/08/09/linuxxi-lie-4-pxe-plus-dhcp-plus-nfs-plus-kickstartwu-ren-zhi-shou-pi-liang-an-zhuang-centos6-dot-3-x64/"/>
-    <id>https://www.quxionglie.com/2014/08/09/linuxxi-lie-4-pxe-plus-dhcp-plus-nfs-plus-kickstartwu-ren-zhi-shou-pi-liang-an-zhuang-centos6-dot-3-x64/</id>
-    <published>2014-08-09T08:42:00.000Z</published>
-    <updated>2025-02-28T01:29:41.493Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;#1. 基本说明&lt;/p&gt;
-&lt;p&gt;相关资料请参考:&lt;br&gt;&lt;a href=&quot;/blog/2013/01/24/pxe-plus-dhcp-plus-nfs-plus-kickstart-centos5-dot-8-x64/&quot;&gt;linux系列2 - pxe+dhcp+nfs+kickstart无人值守批量安装Centos5.8 x64&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;###centos5.x与centos6.x不一致的地方：&lt;br&gt;(1)安装NFS时的RPC程序，centos5.x中叫做portmap，centos6.x叫rpcbind。&lt;/p&gt;
-&lt;p&gt;(2)tftp默认目录，centos5.x时是 /tftpboot ，centos6.x在 /var/lib/tftpboot&lt;/p&gt;
-&lt;p&gt;(3)dhcp配置文件位置, centos5.x时是 /etc/dhcpd.conf ，centos6.x在 /etc/dhcp/dhcpd.conf&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="linux" scheme="https://www.quxionglie.com/categories/linux/"/>
     
     
   </entry>
