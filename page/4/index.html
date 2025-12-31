@@ -168,6 +168,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="lie">
+      <meta itemprop="description" content="Yesterday You Said Tomorrow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿烈的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2013/02/17/gradle-01-build-project-dir/" class="post-title-link" itemprop="url">使用gradle构建项目01-建立项目目录结构 </a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2013-02-17 22:01:00" itemprop="dateCreated datePublished" datetime="2013-02-17T22:01:00+08:00">2013-02-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/gradle/" itemprop="url" rel="index"><span itemprop="name">gradle</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>gradle的目录的结构规范和maven是一样的，我们来看一下Maven标准目录结构  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2013/02/17/gradle-01-build-project-dir/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -922,91 +996,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="lie">
-      <meta itemprop="description" content="Yesterday You Said Tomorrow">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿烈的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2012/03/24/managing-hierarchical-data-in-oracle-2/" class="post-title-link" itemprop="url">基于左右值的无限级分类算法-oracle实现02</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2012-03-24 10:04:00" itemprop="dateCreated datePublished" datetime="2012-03-24T10:04:00+08:00">2012-03-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/oralce/" itemprop="url" rel="index"><span itemprop="name">oralce</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<p>本文参考了：<br>Mike Hillyer的《Managing Hierarchical Data in MySQL》<br>及Yimin的翻译版《MYSQL中分层数据的管理》</p>
-<p>#3.检索单一路径</p>
-<p>在嵌套集合模型中，我们可以不用多个自连接就可以检索出单一路径：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> parent.name</span><br><span class="line"><span class="keyword">FROM</span> nested_category    node,</span><br><span class="line">nested_category   parent</span><br><span class="line"><span class="keyword">WHERE</span> node.lft <span class="keyword">BETWEEN</span> parent.lft <span class="keyword">AND</span> parent.rgt</span><br><span class="line"><span class="keyword">AND</span> node.name <span class="operator">=</span> <span class="string">&#x27;FLASH&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> parent.lft;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NAME</span><br><span class="line">--------------------</span><br><span class="line">ELECTRONICS</span><br><span class="line">PORTABLE ELECTRONICS</span><br><span class="line">MP3 PLAYERS</span><br><span class="line">FLASH</span><br></pre></td></tr></table></figure>
-
-<p>#4.检索节点的深度</p>
-<p>我们已经知道怎样去呈现一棵整树，但是为了更好的标识出节点在树中所处层次，我们怎样才能检索出节点在树中的深度呢？我们可以在先前的查询语句上增加COUNT函数和GROUP BY子句来实现：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> node.name, (<span class="built_in">COUNT</span>(parent.name) <span class="operator">-</span> <span class="number">1</span>) <span class="keyword">AS</span> depth</span><br><span class="line"><span class="keyword">FROM</span> nested_category node,</span><br><span class="line">nested_category   parent</span><br><span class="line"><span class="keyword">WHERE</span> node.lft <span class="keyword">BETWEEN</span> parent.lft <span class="keyword">AND</span> parent.rgt</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> node.name  </span><br></pre></td></tr></table></figure>
-
-<p>#5.检索子树的深度<br>当我们需要子树的深度信息时，我们不能限制自连接中的node或parent，因为这么做会打乱数据集的顺序。因此，我们添加了第三个自连接作为子查询，来得出子树新起点的深度<br>值：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> node.name, (<span class="built_in">COUNT</span>(parent.name) <span class="operator">-</span>(sub_tree.depth <span class="operator">+</span> <span class="number">1</span>))   depth</span><br><span class="line">  <span class="keyword">FROM</span> nested_category   node,</span><br><span class="line">  nested_category   parent,</span><br><span class="line">  nested_category   sub_parent,</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">SELECT</span> node.name, (<span class="built_in">COUNT</span>(parent.name) <span class="operator">-</span> <span class="number">1</span>)</span><br><span class="line">  <span class="keyword">AS</span> depth</span><br><span class="line">  <span class="keyword">FROM</span> nested_category   node,</span><br><span class="line">  nested_category   parent</span><br><span class="line">  <span class="keyword">WHERE</span> node.lft <span class="keyword">BETWEEN</span> parent.lft <span class="keyword">AND</span> parent.rgt</span><br><span class="line">  <span class="keyword">AND</span> node.name <span class="operator">=</span> <span class="string">&#x27;PORTABLE ELECTRONICS&#x27;</span></span><br><span class="line">  <span class="keyword">GROUP</span> <span class="keyword">BY</span> node.name </span><br><span class="line">)  sub_tree</span><br><span class="line"><span class="keyword">WHERE</span> node.lft <span class="keyword">BETWEEN</span> parent.lft <span class="keyword">AND</span> parent.rgt</span><br><span class="line"><span class="keyword">AND</span> node.lft <span class="keyword">BETWEEN</span> sub_parent.lft <span class="keyword">AND</span> sub_parent.rgt</span><br><span class="line"><span class="keyword">AND</span> sub_parent.name <span class="operator">=</span> sub_tree.name</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> node.name,node.lft,sub_tree.depth</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> node.lft;</span><br></pre></td></tr></table></figure>
-
-
-<p>这个查询语句可以检索出任一节点子树的深度值，包括根节点。这里的深度值跟你指定的节点有关。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1078,14 +1067,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
