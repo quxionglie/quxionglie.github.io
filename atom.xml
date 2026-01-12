@@ -6,7 +6,7 @@
   <link href="https://www.quxionglie.com/atom.xml" rel="self"/>
   
   <link href="https://www.quxionglie.com/"/>
-  <updated>2025-12-31T07:19:58.215Z</updated>
+  <updated>2026-01-12T13:29:30.609Z</updated>
   <id>https://www.quxionglie.com/</id>
   
   <author>
@@ -17,19 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>【转】人工智能将以不同方式改变的八个软件市场</title>
+    <link href="https://www.quxionglie.com/2026/01/12/eight-software-markets-ai-that-will/"/>
+    <id>https://www.quxionglie.com/2026/01/12/eight-software-markets-ai-that-will/</id>
+    <published>2026-01-12T13:20:20.000Z</published>
+    <updated>2026-01-12T13:29:30.609Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;原文：&lt;a href=&quot;https://davegriffith.substack.com/p/eight-software-markets-ai-that-will&quot;&gt;Dave Griffith : Eight Software Markets That AI Will Transform Differently&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;并非所有软件生来相同，也无法以相同的方式重新开发。&lt;/p&gt;
+&lt;p&gt;克里斯·洛伊最近发表了一篇题为&lt;a href=&quot;https://chrisloy.dev/post/2025/12/30/the-rise-of-industrial-software&quot;&gt;《工业软件的崛起》&lt;/a&gt;的深思熟虑的文章，文中提出了关于智能编码工具将对软件生产的质量和数量产生何种影响的关键问题。他借鉴了杰文斯悖论——一个阐述市场如何改变生产成本的经济学理论——并指出其与农业、纺织业乃至印刷业市场变化的历史相似之处。他将这类软件称为“工业软件”，并预测软件产量将会增加，但质量会下降。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="ai" scheme="https://www.quxionglie.com/categories/ai/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>AI浪潮与积极应对</title>
     <link href="https://www.quxionglie.com/2025/12/21/ai-wave-and-impact/"/>
     <id>https://www.quxionglie.com/2025/12/21/ai-wave-and-impact/</id>
     <published>2025-12-21T07:32:33.000Z</published>
-    <updated>2025-12-31T07:19:58.215Z</updated>
+    <updated>2026-01-03T11:02:13.284Z</updated>
     
     
-    <summary type="html">&lt;p&gt;从2022年chatgpt横空出世以来，从midjourney图片生成到openai的图片/视频生成都让人惊艳。AI能做的比我们想的还要多还要强。 如用chatgpt查资料输入标题就能查到以前需使用google搜索后自己归纳出来和材料，图片/视频生成导致以前许多文学工作者失业。&lt;/p&gt;
-&lt;p&gt;在传统搜索之外像Google搜索推出「AI Mode」（AI 模式），将AI进一步融入产品中。除了互联网行业外，其它传统行业也将AI当做助力。&lt;/p&gt;
-&lt;p&gt;多年前像深圳北大医院，门诊挂号窗口差不多有10个，而后来除了2个人工窗口之外其它全部改为了自动取号机。机器取代人类让人触不及防。社会向机器化智能化发展。而现在AI取代人类也将成为现实。&lt;/p&gt;
-&lt;p&gt;人的价值在哪里？如果AI也能写代码/文档，程序员的价值体现是哪里？像以前你可以通过个人博客、公众号及GitHub代码库(绿点)等体现你的思考和职业素养，在 AI 能够批量生成代码和文章的 2025 年，这些都可能是AI刷出来的，传统的“产出量”已不再是价值证明，含金量在明显下降。&lt;/p&gt;
-&lt;p&gt;如果查看数个时代(工业)变革，我们会发现每次变革从发起到影响全球的时间越来越短。现在AI浪潮已经过来，而我们却仍是后知后觉。&lt;/p&gt;
-&lt;p&gt;AI时代变革已经到来，我们是否准备好他的冲击？&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;从2022年chatgpt横空出世以来，从midjourney图片生成到openai的图片/视频生成都让人惊艳。AI能做的比我们想的还要多还要强。 如用chatgpt查资料输入标题就能查到以前需使用google搜索后自己归纳出来和材料，图片/视频生成导致以前许多文学工作者失业。&lt;/p&gt;</summary>
     
     
     
@@ -352,26 +366,6 @@
     
     
     <category term="jvm" scheme="https://www.quxionglie.com/categories/jvm/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Fabric-03 fab命令</title>
-    <link href="https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/"/>
-    <id>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</id>
-    <published>2014-08-30T00:52:00.000Z</published>
-    <updated>2025-02-28T01:29:41.494Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Fabric最常用的命令行工具是fab。当Fabric安装的时候，我们都能在环境变量中找到它。&lt;/p&gt;
-&lt;p&gt;官方usage说明：&lt;a href=&quot;http://docs.fabfile.org/en/1.9/usage/fab.html&quot;&gt;fab options and arguments&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;主要内容&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#1.基本使用方法&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#2.命令行选项&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#3.Per-task参数&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##3.1 Per-task语法定义&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##3.2 角色和主机 Roles and hosts&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="fabric" scheme="https://www.quxionglie.com/categories/fabric/"/>
     
     
   </entry>
