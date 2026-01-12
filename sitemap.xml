@@ -227,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/04/10/seemingly-simple-yet-very-difficult-feats/</loc>
+    <loc>https://www.quxionglie.com/2015/04/09/what-skills-do-developer-have/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -236,7 +236,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/04/09/what-skills-do-developer-have/</loc>
+    <loc>https://www.quxionglie.com/2015/04/10/seemingly-simple-yet-very-difficult-feats/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -326,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/</loc>
+    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -335,7 +335,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/02/17/gradle-01-build-project-dir/</loc>
+    <loc>https://www.quxionglie.com/2013/02/16/build-openjdk7-in-centos6-dot-3/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -362,15 +362,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2012/03/23/managing-hierarchical-data-in-oracle-1/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -380,7 +371,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
+    <loc>https://www.quxionglie.com/2012/03/23/what-you-are-doing-in-5-years/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -399,6 +390,15 @@
   
   <url>
     <loc>https://www.quxionglie.com/2012/03/26/managing-hierarchical-data-in-oracle-4/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2012/03/24/managing-hierarchical-data-in-oracle-2/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -478,13 +478,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/java/</loc>
-    <lastmod>2026-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/categories/gradle/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -492,7 +485,21 @@
   </url>
   
   <url>
+    <loc>https://www.quxionglie.com/categories/java/</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/categories/android/</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/categories/lua/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -513,13 +520,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/lua/</loc>
-    <lastmod>2026-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/categories/fabric/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -534,6 +534,13 @@
   </url>
   
   <url>
+    <loc>https://www.quxionglie.com/categories/%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -542,13 +549,6 @@
   
   <url>
     <loc>https://www.quxionglie.com/categories/hexo/</loc>
-    <lastmod>2026-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/categories/%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
