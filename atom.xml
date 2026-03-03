@@ -6,7 +6,7 @@
   <link href="https://www.quxionglie.com/atom.xml" rel="self"/>
   
   <link href="https://www.quxionglie.com/"/>
-  <updated>2026-01-12T15:18:01.413Z</updated>
+  <updated>2026-03-03T15:29:50.986Z</updated>
   <id>https://www.quxionglie.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>消失的程序员</title>
+    <link href="https://www.quxionglie.com/2026/02/28/the-disappearing-programmer/"/>
+    <id>https://www.quxionglie.com/2026/02/28/the-disappearing-programmer/</id>
+    <published>2026-02-28T14:28:10.000Z</published>
+    <updated>2026-03-03T15:29:50.986Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;从去年开始，各种 AI 大模型得到了长足发展，由此导致 AI Code 发生了翻天覆地的变化。&lt;/p&gt;
+&lt;p&gt;AI 辅助编码带来开发效率的显著提升——即便不说翻十倍，至少也是 3 到 5 倍的提升。若工作量不变，效率提升就意味着不再需要那么多人，接下来便是裁员。&lt;/p&gt;
+&lt;p&gt;未来是机遇还是挑战？&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="ai" scheme="https://www.quxionglie.com/categories/ai/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>【转】人工智能将以不同方式改变的八个软件市场</title>
@@ -348,24 +367,6 @@
       
     
     
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JAVA垃圾回收入门</title>
-    <link href="https://www.quxionglie.com/2015/03/21/java-gc-basic/"/>
-    <id>https://www.quxionglie.com/2015/03/21/java-gc-basic/</id>
-    <published>2015-03-21T13:04:00.000Z</published>
-    <updated>2025-02-28T01:29:41.494Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;2012年写的笔记。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://pan.baidu.com/s/1jG03A8A&quot;&gt;点击下载pdf&lt;/a&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="jvm" scheme="https://www.quxionglie.com/categories/jvm/"/>
     
     
   </entry>
