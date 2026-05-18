@@ -209,6 +209,24 @@
   </url>
   
   <url>
+    <loc>https://www.quxionglie.com/2014/08/11/learning-fabric-1-overview-and-tutorial/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
+    
+    <lastmod>2025-02-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.quxionglie.com/2014/08/24/learning-fabric2-hosts-and-roles/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -227,16 +245,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2014/08/11/learning-fabric-1-overview-and-tutorial/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.quxionglie.com/2014/08/30/learning-fabric3-fab/</loc>
+    <loc>https://www.quxionglie.com/2015/04/09/what-skills-do-developer-have/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -263,15 +272,6 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2015/04/09/what-skills-do-developer-have/</loc>
-    
-    <lastmod>2025-02-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.quxionglie.com/2013/04/14/install-pptp-in-centos6-dot-2-64bit-at-linode/</loc>
     
     <lastmod>2025-02-28</lastmod>
@@ -290,7 +290,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/07/17/linux-03-permission/</loc>
+    <loc>https://www.quxionglie.com/2013/07/16/gradle-02-basic-use/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -299,7 +299,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2013/07/16/gradle-02-basic-use/</loc>
+    <loc>https://www.quxionglie.com/2013/07/17/linux-03-permission/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -425,7 +425,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
+    <loc>https://www.quxionglie.com/2012/03/26/managing-hierarchical-data-in-oracle-4/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -434,7 +434,7 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/2012/03/26/managing-hierarchical-data-in-oracle-4/</loc>
+    <loc>https://www.quxionglie.com/2012/05/12/team-thinking/</loc>
     
     <lastmod>2025-02-28</lastmod>
     
@@ -561,14 +561,14 @@
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>https://www.quxionglie.com/categories/%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.quxionglie.com/categories/%E5%BC%80%E5%8F%91/</loc>
+    <loc>https://www.quxionglie.com/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
